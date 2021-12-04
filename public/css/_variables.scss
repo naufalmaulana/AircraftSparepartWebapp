@@ -1,0 +1,53 @@
+$blue: #78D5E4;
+$white: #fff;
+$black: black;
+
+// blue class
+.bg-blue{
+    background-color: $blue;
+}
+.txt-blue{
+    color: $blue;
+}
+.border-blue{
+    border-color: $blue;
+}
+.outline-blue{
+    -webkit-text-stroke: 1px $blue;
+}
+.hover-txt-blue{
+    &:hover{
+        color: $blue !important;
+    }
+}
+.hover-bg-blue{
+    &:hover{
+        background-color: $blue !important;
+    }
+}
+// white class
+.bg-white{
+    background-color: $white;
+}
+.txt-white{
+    color: $white;
+}
+.border-white{
+    border-color: $white;
+}
+.outline-white{
+    -webkit-text-stroke: 1px $white;
+}
+// black class
+.bg-black{
+    background-color: $black;
+}
+.txt-black{
+    color: $black;
+}
+.border-black{
+    border-color: $black;
+}
+.outline-black{
+    -webkit-text-stroke: 1px $black;
+}

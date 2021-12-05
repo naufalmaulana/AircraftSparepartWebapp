@@ -14,14 +14,19 @@
                     </div>
                 <h1 class="fw-bold">Get Started With Your <br> Account</h1>
                 <p>Already have an account? <a href="{{ route('login') }}" class="txt-blue text-decoration-none">Log in</a></p>
-                <form>
+                <form name="register-form" id="register-form" method="post" action="{{route('storeRegister')}}">
+                  @csrf
+                  <label for="name" class="form-label">Name</label>
+                  <div class=" mb-4 shadow rounded">
+                    <input type="text" id="name" name="name" class="form-control validate" />
+                  </div>
                     <label for="email" class="form-label">Email</label>
                     <div class=" mb-4 shadow rounded">
-                      <input type="text" id="email" class="form-control validate" />
+                      <input type="text" id="email" name="email" class="form-control validate" />
                     </div>
                     <label for="password" class="form-label">Password</label>
                     <div class=" mb-3 shadow rounded d-flex">
-                      <input type="password" id="password" class="form-control validate" />
+                      <input type="password" id="password" name="password" class="form-control validate" />
                       <i class="bi bi-eye-fill" id="togglePasswordForm" style="margin-left: -30px; cursor: pointer; margin-top:10px;"></i>
                     </div>
                     <label for="retype-password" class="form-label">Re-type Password</label>
@@ -29,35 +34,30 @@
                       <input type="password" id="retype-password" class="form-control validate" />
                       <i class="bi bi-eye-fill" id="toggleRtypePasswordForm" style="margin-left: -30px; cursor: pointer; margin-top:10px;"></i>
                     </div>
-                    <label for="airport" class="form-label">Organization Type</label>
+                    <label for="organization" class="form-label">Organization Type</label>
                     <div class=" mb-3 shadow rounded ">
-                      <select name="airport" id="airport" class="form-select">
-                          <option value="Airlines">Airlines</option>
-                          <option value="Vendor">Vendor</option>
-                          <option value="Manufacture">Manufacture</option>
+                      <select id="organization" name="organization" class="form-select">
+                        <option value="manufacturer">Manufacturer</option>
+                          <option value="airline">Airline</option>
+                          <option value="vendor">Vendor</option>
                           {{-- <option value="Maintenance, Repair and Operations (MRO)">Maintenance, Repair and Operations (MRO)</option> --}}
                       </select>
                     </div>
-                    <label for="name" class="form-label">Organization Name</label>
-                    <div class=" mb-3 shadow rounded">
-                      <input type="text" id="name" class="form-control" />
-                    </div>
-                    <label for="pic" class="form-label">PIC Name (Airlines Only)</label>
-                    <div class=" mb-3 shadow rounded">
-                      <input type="text" id="pic" class="form-control"/>
-                    </div>
-                    {{-- <label for="airport" class="form-label">Airport</label>
+                    <label for="role" class="form-label">Role</label>
                     <div class=" mb-3 shadow rounded ">
-                      <select name="airport" id="airport" class="form-select">
-                          <option value="CGK">CGK</option>
-                          <option value="SUB">SUB</option>
-                          <option value="HLP">HLP</option>
+                      <select id="role" name="role" class="form-select">
+                          <option value="supervisor">Supervisor</option>
+                          <option value="member">Member</option>
                       </select>
-                    </div> --}}
+                    </div>
+                    <label for="address" class="form-label">Address</label>
+                    <div class=" mb-4 shadow rounded">
+                      <input type="text" id="address" name="address" class="form-control validate" />
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5">Sign up</button>
+                  </div>
                 </form>
-                <div class="text-center">
-                    <button type="submit" class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5">Sign up</button>
-                </div>
             </div>
         </div>
     </div>

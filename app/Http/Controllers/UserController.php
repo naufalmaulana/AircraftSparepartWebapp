@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Response;
+use Cookie;
 
 class UserController extends Controller
 {
@@ -11,6 +13,24 @@ class UserController extends Controller
     public function login(){
         return view("login");
     }
+
+    public function storeLogin(Request $request){
+        $response = Http::post('http://localhost:8080/api/signin', [
+            "email" => $request->email,
+            "password" => $request->password
+        ]);
+        if($response->successful()){
+            $token= $response->json()['response'];
+            $minutes = 15;
+            Cookie::queue('token', $token , $minutes);
+            return redirect()->route('home');
+        } else {
+            $error= $response->json()['response'];
+            return redirect()->back()->with('error', $error);
+        }
+    }
+
+
     public function register(){
         return view("register");
     }
@@ -24,9 +44,13 @@ class UserController extends Controller
             "address" => $request->address,
             "password" => $request->password
         ]);
-        $assets= json_decode($response->json()['response']);
-        dd($assets);
-        return redirect('login');
+        if($response->successful()){
+            return redirect()->route('login');
+        } else {
+            $error= $response->json()['response'];
+            return redirect()->back()->with('error', $error);
+        }
+       
     }
 
     public function forgotPassword(){

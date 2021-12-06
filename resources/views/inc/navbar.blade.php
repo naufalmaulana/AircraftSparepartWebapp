@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-black py-1 px-2">
     <div class="container-xxl">
       <!-- navbar brand / title -->
-      <a class="navbar-brand col-md-2" href="{{ route('landing') }}">
+      <a class="navbar-brand col-md-2" href="{{ route('home') }}">
         <img src="/assets/logo4.svg" class="nav-logo" width="70" height="70" alt="car.go logo">
       </a>
       <!-- toggle button for mobile nav -->
@@ -14,7 +14,7 @@
       <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
         <ul class="navbar-nav">
           <li class="nav-item ">
-            <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('landing') }}">Home</a>
+            <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('myorder') }}">My Orders</a>

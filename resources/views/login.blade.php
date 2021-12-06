@@ -13,21 +13,28 @@
                     </div>
                 <h1 class="fw-bold">Sign In With Your <br> Account</h1>
                 <p>Didn't have an account? <a href="{{ route('register') }}" class="txt-blue text-decoration-none">Sign up</a></p>
-                <form>
+                <form name="login-form" id="login-form" method="post" action="{{route('storeLogin')}}">
+                    @csrf
+                    @if(session()->has('error'))
+                    <div class="row">
+                      <span class="text-danger">{{ session()->get('error')}}</span>
+                    </div>
+                    @endif
                     <label for="email" class="form-label">Email</label>
                     <div class="input-group mb-4 shadow rounded">
-                      <input type="text" id="email" class="form-control" />
+                      <input name="email" type="text" id="email" class="form-control" />
                     </div>
                     <label for="password" class="form-label">Password</label>
                     <div class=" mb-3 shadow rounded d-flex">
-                      <input type="password" id="password" class="form-control validate" />
+                      <input name="password" type="password" id="password" class="form-control validate" />
                       <i class="bi bi-eye-fill" id="togglePasswordForm" style="margin-left: -30px; cursor: pointer; margin-top:10px;"></i>
                     </div>
-                    <a href="{{ route('forgotPassword') }}" class="text-decoration-none txt-blue">Forgot your password ?</a>
+                    {{--<a href="{{ route('forgotPassword') }}" class="text-decoration-none txt-blue">Forgot your password ?</a>--}}
+                    <div class="text-center">
+                        <button class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5" type="submit">Sign In</button>
+                    </div>
                 </form>
-                <div class="text-center">
-                    <button class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5" onclick="window.location.href='{{route('landing')}}'">Sign In</button>
-                </div>
+                
             </div>
         </div>
     </div>

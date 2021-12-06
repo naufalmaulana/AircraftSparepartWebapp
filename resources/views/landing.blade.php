@@ -11,9 +11,8 @@
         <div class="col-md-3">
           <div class=" rounded  p-2 right-content">
             <div class="mb-3">
-              <h3 class="text-start">Example Airline</h3>
-              <p>airlines@email.com</p>
-              <p>AIRLINES</p>
+              <h3 class="text-start">{{$jwtOrg}}</h3>
+              <p>{{$jwtEmail}}</p>
             </div>
             <table class="table border">
               <tr>
@@ -28,6 +27,9 @@
         <div class="col-md-9">
           <div id="owned" class="row justify-content-start align-items-center g-2">
           <h3 class="text-start mb-3">Owned Spare-part(s)</h3>
+          @empty($assetOwned)
+              <h1>You do not owned any spare parts</h1>
+          @endempty
           @foreach ($assetsOwned as $asset)
             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
               <div class="position-relative border bg-white p-1 rounded spareparts">
@@ -51,6 +53,9 @@
           </div>
           <div id="sale" class="row justify-content-start align-items-center g-2 d-none">
           <h3 class="text-start mb-3">Spare-part(s) For Sale</h3>
+          @empty($assets)
+              <h1>There are no spare parts available</h1>
+          @endempty
           @foreach ($assets as $asset)
             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
               <div class="position-relative border bg-white p-1 rounded spareparts">

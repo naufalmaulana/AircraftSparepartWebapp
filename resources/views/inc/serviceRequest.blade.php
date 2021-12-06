@@ -13,7 +13,7 @@
         <div class="modal-footer justify-content-center">
           {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary">Understood</button> --}}
-          <button id="orderBtn" type="button" class="btn bg-blue text-white fw-bold px-5" onclick="window.location.href='{{route('landing')}}'">Agree</button>
+          <button id="orderBtn" type="button" class="btn bg-blue text-white fw-bold px-5" onclick="window.location.href='{{route('home')}}'">Agree</button>
         </div>
       </div>
     </div>

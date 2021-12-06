@@ -8,14 +8,15 @@ use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
-    public function landing(){
+    public function landing(Request $request){
+        $token = $request->cookie('token');
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg3Mjg0NzIsInVzZXJuYW1lIjoiY2hyaXN0ZXN0ZEBnbWFpbC5jb20iLCJvcmdOYW1lIjoibWFudWZhY3R1cmVyIiwiaWF0IjoxNjM4Njk4NDcyfQ.ymRj5UbjxzahgEgH_z05brKS34CO_VNGh_69_ulpEyc',
+            'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/queryallassets');
         $assets = json_decode($response->json()['response']);
 
         $responseOwned = Http::withHeaders([
-            'Authorization' => 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzg3Mjg0NzIsInVzZXJuYW1lIjoiY2hyaXN0ZXN0ZEBnbWFpbC5jb20iLCJvcmdOYW1lIjoibWFudWZhY3R1cmVyIiwiaWF0IjoxNjM4Njk4NDcyfQ.ymRj5UbjxzahgEgH_z05brKS34CO_VNGh_69_ulpEyc',
+            'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/queryassetowned');
         $assetsOwned = json_decode($responseOwned->json()['response']);
         return view("landing", compact('assets', 'assetsOwned'));

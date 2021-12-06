@@ -16,6 +16,11 @@
                 <p>Already have an account? <a href="{{ route('login') }}" class="txt-blue text-decoration-none">Log in</a></p>
                 <form name="register-form" id="register-form" method="post" action="{{route('storeRegister')}}">
                   @csrf
+                  @if(session()->has('error'))
+                  <div class="row">
+                    <span class="text-danger">{{ session()->get('error')}}</span>
+                  </div>
+                  @endif
                   <label for="name" class="form-label">Name</label>
                   <div class=" mb-4 shadow rounded">
                     <input type="text" id="name" name="name" class="form-control validate" />

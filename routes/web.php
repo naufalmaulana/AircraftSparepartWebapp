@@ -17,22 +17,20 @@ Route::get('/register','App\Http\Controllers\UserController@register')->name('re
 Route::post('/register', 'App\Http\Controllers\UserController@storeRegister')->name('storeRegister');
 Route::post('/login', 'App\Http\Controllers\UserController@storeLogin')->name('storeLogin');
 
-
-Route::get('/ForgotPassword','App\Http\Controllers\UserController@forgotPassword')->name('forgotPassword');
-Route::get('/ResetPassword','App\Http\Controllers\UserController@resetPassword')->name('resetPassword');
-
 Route::middleware('auth.JWT')->group(function () {
     Route::get('/','App\Http\Controllers\HomeController@landing')->name('home');
+    Route::get('/history/{id}','App\Http\Controllers\SparepartsController@history')->name('history');
+    Route::get('/asset/{id}','App\Http\Controllers\SparepartsController@detail')->name('sparepartDetail');
+    Route::post('/buy/{id}', 'App\Http\Controllers\SparepartsController@buy')->name('buy');
 
     Route::get('/HomeVendor','App\Http\Controllers\HomeController@supplierLanding')->name('supplierLanding');
     Route::get('/HomeManufacture','App\Http\Controllers\HomeController@mroLanding')->name('mroLanding');
     Route::get('/SparepartsCatalogue','App\Http\Controllers\SparepartsController@spareparts')->name('spareparts');
-    Route::get('/SparepartDetails','App\Http\Controllers\SparepartsController@sparepartDetails')->name('sparepartDetails');
     Route::get('/ShoppingCart','App\Http\Controllers\CartController@cart')->name('cart');
     Route::get('/MyOrder','App\Http\Controllers\MyorderController@myorder')->name('myorder');
     Route::get('/OwnedItemDetails','App\Http\Controllers\MyorderController@ownedDetails')->name('ownedDetails');
     Route::get('/MaintenanceList','App\Http\Controllers\MaintenanceController@maintenance')->name('maintenance');
-    Route::get('/Tracking','App\Http\Controllers\TrackingController@tracking')->name('tracking');
+    Route::get('/tracking','App\Http\Controllers\TrackingController@tracking')->name('tracking');
     Route::get('/TrackingOrder','App\Http\Controllers\TrackingController@trackingOrder')->name('trackingOrder');
 
 });

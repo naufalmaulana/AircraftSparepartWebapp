@@ -27,9 +27,9 @@
         <div class="col-md-9">
           <div id="owned" class="row justify-content-start align-items-center g-2">
           <h3 class="text-start mb-3">Owned Spare-part(s)</h3>
-          @empty($assetOwned)
+          @isset($assetOwned)
               <h1>You do not owned any spare parts</h1>
-          @endempty
+          @endisset
           @foreach ($assetsOwned as $asset)
             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
               <div class="position-relative border bg-white p-1 rounded spareparts">
@@ -54,7 +54,7 @@
           <div id="sale" class="row justify-content-start align-items-center g-2 d-none">
           <h3 class="text-start mb-3">Spare-part(s) For Sale</h3>
           @empty($assets)
-              <h1>There are no spare parts available</h1>
+            <h1>There are no spare parts available</h1>
           @endempty
           @foreach ($assets as $asset)
             <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
@@ -68,8 +68,8 @@
                           <p class="fw-bold mt-0">{{$asset->Record->SparepartName}}</p>
                           <p class="text-muted mb-3 mt-0">25 pcs Left</p>
                           <div class="d-block">
-                            <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Order</button>
-                            <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('ownedDetails')}}'">Details</button>
+                            <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="changeBuyAction('{{$asset->Key}}')">Buy</button>
+                            <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                             {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
                           </div>
                       </div>
@@ -98,7 +98,10 @@ $("#saleBtn").on("click",function(){
 
   $("#owned").hide();
   $("#sale").removeClass("d-none");
-
 });
+
+function changeBuyAction(id){
+  $("#buyForm").attr('action', "/buy/" + id);
+}
 </script>
 @endsection

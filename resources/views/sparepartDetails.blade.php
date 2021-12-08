@@ -13,10 +13,10 @@
             </div>
             <div class="col-md-6">
                 <h1 class="fw-bold">
-                    Sparepart Lorem, ipsum dolor sit amet consectetur adipisicing.
+                    {{$asset['SparepartNumber']}} - {{$asset['SparepartName']}}
                 </h1>
                 <div class="bg-blue text-center text-white px-3 py-0 btn btn-sm c-none">
-                    Ready
+                    {{$asset['Status']}}
                 </div>
                 <hr>
                 <h4 class="txt-blue fw-bold mb-3">Rp1.500.000</h4>

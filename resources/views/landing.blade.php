@@ -47,7 +47,7 @@
                             <p class="text-muted mb-3 mt-0">{{$asset->Record->UpdateDate}}</p>
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
-                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('update', ['id' => $asset->Key] )}}'">Update</button>
+                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key] )}}'">Update</button>
                               <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest">Service</button>
                             </div>
                         </div>

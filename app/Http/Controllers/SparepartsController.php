@@ -22,6 +22,16 @@ class SparepartsController extends Controller
         return view("sparepartDetails", compact('asset', 'id'));
     }
 
+    public function update($id, Request $request){
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->get('http://localhost:8080/api/asset/detail/'.$id);
+        $asset = $response->json()['response'];
+
+        return view("sparepartUpdate", compact('asset', 'id'));
+    }
+
     public function history($id, Request $request){
         $token = $request->cookie('token');
         $response = Http::withHeaders([
@@ -38,6 +48,20 @@ class SparepartsController extends Controller
             'Authorization' => 'Bearer '.$token,
         ])->put('http://localhost:8080/api/asset/transfer/'.$id, [
             "owner" => $request->attributes->get('jwtEmail')
+        ]);
+
+        return redirect()->route('home');
+    }
+
+    public function add(Request $request){
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->post('http://localhost:8080/api/asset/add', [
+            "name" => $request->name,
+            "number" => $request->number, 
+            "quantity" => $request->qty, 
+            "weight" => $request->weight
         ]);
 
         return redirect()->route('home');

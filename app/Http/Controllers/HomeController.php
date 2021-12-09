@@ -21,9 +21,7 @@ class HomeController extends Controller
         $assetsOwned = json_decode($responseOwned->json()['response']);
         return view("landing", compact('assets', 'assetsOwned'));
     }
-    public function supplierLanding(){
-        return view("supplierLanding");
-    }
+
     public function mroLanding(){
         return view("mroLanding");
     }

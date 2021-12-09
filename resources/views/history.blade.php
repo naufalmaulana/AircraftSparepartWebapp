@@ -17,14 +17,14 @@
             <li>
               <div class="timeline-content">
                 <img src="/assets/sparepart-dummy1.jpg" class="img-fluid mb-4 " alt="">
-                <h3 class="date">20th may, 2010</h3>
-                <h1>{{$asset['SparepartName']}}</h1>
-                <p>Owned By: <span class="txt-blue">{{$asset['PIC']}}</span></p>
-                <p>Spare-part Id: <span class="txt-blue">{{$asset['SparepartNumber']}}</span></p>
+                <h3 class="date">{{$asset['UpdateDate']}}</h3>
+                <h1>{{$asset['Name']}}</h1>
+                <p>Owned By: <span class="txt-blue">{{$asset['Owner']}}</span></p>
+                <p>Spare-part Id: <span class="txt-blue">{{$asset['Number']}}</span></p>
                 <p>Spare-part Type: <span class="txt-blue">Metal Pipe</span></p>
                 <p>Spare-part Model: <span class="txt-blue">Piper Pipe</span></p>
-                <p>Quantity: <span class="txt-blue">3 pcs</span></p>
-                <p>Total Weight: <span class="txt-blue">90kg</span></p>
+                <p>Quantity: <span class="txt-blue">{{$asset['Quantity']}} pcs</span></p>
+                <p>Total Weight: <span class="txt-blue">{{$asset['Weight']}} kg</span></p>
               </div>
             </li>
           @endforeach 

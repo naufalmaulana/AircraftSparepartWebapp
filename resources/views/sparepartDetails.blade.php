@@ -13,7 +13,7 @@
             </div>
             <div class="col-md-6">
                 <h1 class="fw-bold">
-                    {{$asset['SparepartNumber']}} - {{$asset['SparepartName']}}
+                    {{$asset['Number']}} - {{$asset['Name']}}
                 </h1>
                 <div class="bg-blue text-center text-white px-3 py-0 btn btn-sm c-none">
                     {{$asset['Status']}}
@@ -22,8 +22,8 @@
                 <h4 class="txt-blue fw-bold mb-3">Rp1.500.000</h4>
                 <ul class="px-0 mb-3" style="list-style-type:none">
                     <li>Category: <span class="txt-blue gw-bold">Abcd</span></li>
-                    <li>Weight: <span class="txt-blue gw-bold">100 kg</span></li>
-                    <li>lorem: <span class="txt-blue gw-bold">Ipsum</span></li>
+                    <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
+                    <li>Update Date: <span class="txt-blue gw-bold">{{$asset['UpdateDate']}}</span></li>
                 </ul>
                 <div class="mb-4">
                     <input id=demoInput type=number min=0 max=1000000 placeholder="Quantity">

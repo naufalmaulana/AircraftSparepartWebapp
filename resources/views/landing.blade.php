@@ -71,9 +71,9 @@
                     <div class="py-2 spareparts__content">
                         <div class="spareparts__content--title">
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Quantity}} pcs Left</p>
+                            <p class="text-muted mb-3 mt-0">{{$asset->RecordQty->Quantity}} pcs Left</p>
                             <div class="d-block">
-                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="{{$jwtOrg == "airline" ? "#airlineBuyModal" : "#staticBackdrop"}}" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) ? "" : "disabled"}}>Buy</button>
+                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) ? "" : "disabled"}}>Buy</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
                             </div>

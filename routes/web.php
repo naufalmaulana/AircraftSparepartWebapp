@@ -25,11 +25,13 @@ Route::middleware('auth.JWT')->group(function () {
     Route::post('/buy/{id}', 'App\Http\Controllers\SparepartsController@buy')->name('buy');
     Route::post('/add/asset', 'App\Http\Controllers\SparepartsController@add')->name('storeAsset');
 
+    Route::post('/update/order/{id}', 'App\Http\Controllers\OrderController@update')->name('orderUpdate');
+
     Route::get('/HomeManufacture','App\Http\Controllers\HomeController@mroLanding')->name('mroLanding');
     Route::get('/SparepartsCatalogue','App\Http\Controllers\SparepartsController@spareparts')->name('spareparts');
     Route::get('/ShoppingCart','App\Http\Controllers\CartController@cart')->name('cart');
-    Route::get('/MyOrder','App\Http\Controllers\MyorderController@myorder')->name('myorder');
-    Route::get('/OwnedItemDetails','App\Http\Controllers\MyorderController@ownedDetails')->name('ownedDetails');
+    Route::get('/MyOrder','App\Http\Controllers\OrderController@myorder')->name('myorder');
+    Route::get('/OwnedItemDetails','App\Http\Controllers\OrderController@ownedDetails')->name('ownedDetails');
     Route::get('/MaintenanceList','App\Http\Controllers\MaintenanceController@maintenance')->name('maintenance');
     Route::get('/tracking','App\Http\Controllers\TrackingController@tracking')->name('tracking');
     Route::get('/TrackingOrder','App\Http\Controllers\TrackingController@trackingOrder')->name('trackingOrder');

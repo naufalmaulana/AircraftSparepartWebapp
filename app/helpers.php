@@ -16,3 +16,14 @@ if(!function_exists('checkBuyAccess')){
         return false;
     }
 }
+
+if(!function_exists('checkOrderStatus')){
+    function checkOrderStatus($status, $org, $buyerOrg, $sellerOrg) {
+        if($status == "Waiting for Buyer Organization" && $org == $buyerOrg){
+            return true;
+        }else if ($status == "Waiting for Seller Organization" && $org == $sellerOrg){
+            return true;
+        }
+        return false;
+    }
+}

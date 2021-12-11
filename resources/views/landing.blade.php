@@ -19,7 +19,7 @@
                 <td><a href="#" id="ownedBtn" class="text-decoration-none txt-blue">Owned Spare-part List</a></td>
               </tr>
               <tr>
-                <td><a href="#" id="saleBtn" class="text-decoration-none txt-blue">Spare-parts For Sale</a></td>
+                <td><a href="#" id="availableBtn" class="text-decoration-none txt-blue">Spare-parts Avaiable</a></td>
               </tr>
               @if ($jwtOrg == "manufacturer")
                 <tr>
@@ -44,7 +44,7 @@
                     <div class="py-2 spareparts__content">
                         <div class="spareparts__content--title">
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->UpdateDate}}</p>
+                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Timestamp}}</p>
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key] )}}'">Update</button>
@@ -58,10 +58,10 @@
           </div>
           <div id="sale" class="row justify-content-start align-items-center g-2" style="display: none;">
             <h3 class="text-start mb-3">Spare-part(s) For Sale</h3>
-            @empty($assets)
+            @empty($assetsAvailable)
               <h1>There are no spare parts available</h1>
             @endempty
-            @foreach ($assets as $asset)
+            @foreach ($assetsAvailable as $asset)
               <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
                 <div class="position-relative border bg-white p-1 rounded spareparts">
                     <div class="positon-relative overflow-hidden mx-auto spareparts__thumbnail">
@@ -73,7 +73,7 @@
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
                             <p class="text-muted mb-3 mt-0">{{$asset->Record->Quantity}} pcs Left</p>
                             <div class="d-block">
-                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="changeBuyAction('{{$asset->Key}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) ? "" : "disabled"}}>Buy</button>
+                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="{{$jwtOrg == "airline" ? "#airlineBuyModal" : "#staticBackdrop"}}" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) ? "" : "disabled"}}>Buy</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
                             </div>
@@ -89,6 +89,7 @@
     </div>
   </section>
 @include('inc.orderRequestedModal')
+@include('inc.airlineBuyModal')
 @include('inc.serviceRequest')
 @endsection
 
@@ -100,7 +101,7 @@ $("#ownedBtn").on("click",function(){
   $("#owned").show();
 });
 
-$("#saleBtn").on("click",function(){
+$("#availableBtn").on("click",function(){
   resetDiv();
   $("#sale").show();
 });
@@ -110,8 +111,13 @@ $("#createBtn").on("click",function(){
   $("#create").show();
 });
 
-function changeBuyAction(id){
+function changeBuyAction(id, name, number, weight, updateBy){
   $("#buyForm").attr('action', "/buy/" + id);
+  $("#airlineBuyForm").attr('action', "/buy/" + id);
+  $("#nameInput").val(name);
+  $("#numberInput").val(number);
+  $("#weightInput").val(weight);
+  $("#updateByInput").val(updateBy);
 }
 
 function resetDiv(){

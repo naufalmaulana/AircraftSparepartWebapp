@@ -23,7 +23,7 @@
                 <ul class="px-0 mb-3" style="list-style-type:none">
                     <li>Category: <span class="txt-blue gw-bold">Abcd</span></li>
                     <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
-                    <li>Update Date: <span class="txt-blue gw-bold">{{$asset['UpdateDate']}}</span></li>
+                    <li>Update Date: <span class="txt-blue gw-bold">{{$asset['Timestamp']}}</span></li>
                 </ul>
                 <div class="mb-4">
                     <input id=demoInput type=number min=0 max=1000000 placeholder="Quantity">
@@ -31,6 +31,7 @@
                     <button class="btn bg-black txt-white py-0" onclick="increment()">+</button>
                 </div>
                 <button class="btn bg-blue txt-white btn-md px-5 rounded-pill fw-bold" type="submit">Add To Cart</button>
+                <button class="btn bg-blue text-white btn-md px-5 rounded-pill fw-bold" onclick="window.location.href='{{route('history', ['id' => $id] )}}'">History</button>
             </div>
         </div>
     </div>

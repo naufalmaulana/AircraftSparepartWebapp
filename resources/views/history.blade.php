@@ -17,7 +17,7 @@
             <li>
               <div class="timeline-content">
                 <img src="/assets/sparepart-dummy1.jpg" class="img-fluid mb-4 " alt="">
-                <h3 class="date">{{$asset['UpdateDate']}}</h3>
+                <h3 class="date">{{$asset['Timestamp']}}</h3>
                 <h1>{{$asset['Name']}}</h1>
                 <p>Owned By: <span class="txt-blue">{{$asset['Owner']}}</span></p>
                 <p>Spare-part Id: <span class="txt-blue">{{$asset['Number']}}</span></p>

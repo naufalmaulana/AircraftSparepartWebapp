@@ -43,13 +43,31 @@ class SparepartsController extends Controller
     }
 
     public function buy($id, Request $request){
+        $org = $request->attributes->get('jwtOrg');
         $token = $request->cookie('token');
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer '.$token,
-        ])->put('http://localhost:8080/api/asset/transfer/'.$id, [
-            "owner" => $request->attributes->get('jwtEmail')
-        ]);
-
+        if($org == "airline"){
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->put('http://localhost:8080/api/asset/update/'.$id, [
+                "name" =>$request->name,
+                "number" => $request->number,
+                "updateBy" => $request->updateBy,
+                "status" => "Available",
+                "quantity" => $request->quantity,
+                "weight" => $request->weight,
+                "newOwner" => $request->attributes->get('jwtEmail'),
+            ]);
+    
+        } else {
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->put('http://localhost:8080/api/asset/transfer/'.$id, [
+                "owner" => $request->attributes->get('jwtEmail')
+            ]);
+    
+        }
+  
+       
         return redirect()->route('home');
     }
 

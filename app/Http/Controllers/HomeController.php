@@ -15,11 +15,15 @@ class HomeController extends Controller
         ])->get('http://localhost:8080/api/queryallassets');
         $assets = json_decode($response->json()['response']);
 
+        $assetsAvailable= array_filter($assets, function ($item) {
+            return $item->Record->Status == "Available";
+        });
+
         $responseOwned = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/queryassetowned');
         $assetsOwned = json_decode($responseOwned->json()['response']);
-        return view("landing", compact('assets', 'assetsOwned'));
+        return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable'));
     }
 
     public function mroLanding(){

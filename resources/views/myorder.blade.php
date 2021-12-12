@@ -11,6 +11,10 @@
         <h1 class="fw-bold txt-black mb-3">
           My Orders
         </h1>
+        <div class="col mb-4">
+          <button class="btn btn-dark" id="purchaseBtn">Purchase Orders</button>
+          <button class="btn btn-dark" id="repairBtn">Repair Orders</button>
+        </div>
         <form class="text-center" action="">
           <div class="input-group text-center justify-content-center ">
             <input class="rounded py-1 w-25" type="text" placeholder="Search Order">
@@ -18,25 +22,25 @@
         </form>
       </div>
         <div class="row justify-content-center align-items-center">
-            <div class="col-md-10 rounded shadow">
+            <div class="col-md-10 rounded shadow" id="purchaseOrderContainer">
                 <table class="table">
                     <thead>
                       <tr>
                         <th scope="col">No</th>
                         <th scope="col">Order ID</th>
                         <th scope="col">Date</th>
-                        <th class="d-none d-md-table-cell" scope="col">Order Id</th>
+                        <th class="d-none d-md-table-cell" scope="col">Spare-part Id</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($ordersAvailable as $order)
+                      @foreach ($purchaseOrdersAvailable as $order)
                         <tr>
                           <th scope="row">{{$loop->iteration}}</th>
                           <td>{{$order->Record->ID}}</td>
                           <td>{{$order->Record->Timestamp}}</td>
-                          <td class="d-none d-md-table-cell">LG0063175</td>
+                          <td class="d-none d-md-table-cell">{{$order->Record->AssetID}}</td>
                           <td>
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
@@ -48,10 +52,41 @@
                     </tbody>
                   </table>
             </div>
+            <div class="col-md-10 rounded shadow" id="repairOrderContainer" style="display: none;">
+              <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">No</th>
+                      <th scope="col">Order ID</th>
+                      <th scope="col">Date</th>
+                      <th class="d-none d-md-table-cell" scope="col">Spare-part ID</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach ($repairOrdersAvailable as $order)
+                      <tr>
+                        <th scope="row">{{$loop->iteration}}</th>
+                        <td>{{$order->Record->ID}}</td>
+                        <td>{{$order->Record->Timestamp}}</td>
+                        <td class="d-none d-md-table-cell">{{$order->Record->AssetID}}</td>
+                        <td>
+                            <div class="text-success">{{$order->Record->Status}}</div>
+                        </td>
+                        <td>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Verify</button>
+                        </td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+          </div>
         </div>
     </div>
 </section>
 @include('inc.verifyOrderModal')
+@include('inc.verifyServiceOrderModal')
 @include('inc.actionbtnModal')
 @endsection
 
@@ -59,6 +94,22 @@
 <script>
   function changeVerifyAction(id){
     $("#verifyOrderForm").attr('action', "/update/order/" + id);
+    $("#verifyServiceOrderForm").attr('action', "/repair/verify/" + id);
+  }
+
+  $("#purchaseBtn").on("click",function(){
+    resetDiv();
+    $("#purchaseOrderContainer").show();
+  });
+
+  $("#repairBtn").on("click",function(){
+    resetDiv();
+    $("#repairOrderContainer").show();
+  });
+
+  function resetDiv(){
+    $("#purchaseOrderContainer").hide();
+    $("#repairOrderContainer").hide();
   }
 </script>
 @endsection

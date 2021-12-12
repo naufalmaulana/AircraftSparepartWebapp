@@ -43,8 +43,9 @@
                     <div class=" mb-3 shadow rounded ">
                       <select id="organization" name="organization" class="form-select">
                         <option value="manufacturer">Manufacturer</option>
-                          <option value="airline">Airline</option>
+                        <option value="mro">MRO</option>
                           <option value="vendor">Vendor</option>
+                          <option value="airline">Airline</option>
                           {{-- <option value="Maintenance, Repair and Operations (MRO)">Maintenance, Repair and Operations (MRO)</option> --}}
                       </select>
                     </div>

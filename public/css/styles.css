@@ -1,3 +1,15 @@
+.history-default{
+  background-color: #414141 !important;
+}
+
+.history-purchased{
+  background-color: rgb(37, 42, 71) !important;
+}
+
+.history-requestRepair{
+  background-color: rgb(18, 46, 46) !important;
+}
+
 .bg-blue {
   background-color: #78D5E4;
 }

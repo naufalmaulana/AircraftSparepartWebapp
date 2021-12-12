@@ -32,6 +32,21 @@ class SparepartsController extends Controller
         return view("sparepartUpdate", compact('asset', 'id'));
     }
 
+    public function storeUpdate($id, Request $request){
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->put('http://localhost:8080/api/asset/update/'.$id, [
+            "name" => $request->name,
+            "number" => $request->number,
+            "quantity" => $request->qty,
+            "weight" => $request->weight,
+            "status" => $request->status,
+        ]);
+
+        return redirect()->route('home');;
+    }
+
     public function history($id, Request $request){
         $token = $request->cookie('token');
         $response = Http::withHeaders([

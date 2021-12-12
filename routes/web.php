@@ -24,8 +24,12 @@ Route::middleware('auth.JWT')->group(function () {
     Route::get('/update/asset/{id}','App\Http\Controllers\SparepartsController@update')->name('sparepartUpdate');
     Route::post('/buy/{id}', 'App\Http\Controllers\SparepartsController@buy')->name('buy');
     Route::post('/add/asset', 'App\Http\Controllers\SparepartsController@add')->name('storeAsset');
+    Route::post('/update/asset/{id}', 'App\Http\Controllers\SparepartsController@storeUpdate')->name('storeUpdate');
 
     Route::post('/update/order/{id}', 'App\Http\Controllers\OrderController@update')->name('orderUpdate');
+
+    Route::post('/repair/request/{id}', 'App\Http\Controllers\OrderController@requestRepair')->name('requestRepair');
+    Route::post('/repair/verify/{id}', 'App\Http\Controllers\OrderController@verifyRepair')->name('verifyRepair');
 
     Route::get('/HomeManufacture','App\Http\Controllers\HomeController@mroLanding')->name('mroLanding');
     Route::get('/SparepartsCatalogue','App\Http\Controllers\SparepartsController@spareparts')->name('spareparts');

@@ -17,11 +17,20 @@ class OrderController extends Controller
         ])->get('http://localhost:8080/api/queryallpo');
         $orders = json_decode($response->json()['response']);
 
-        $ordersAvailable = array_filter($orders, function ($item) use($org){
+        $purchaseOrdersAvailable = array_filter($orders, function ($item) use($org){
             return ($item->Record->BuyerOrg == $org || $item->Record->SellerOrg == $org);
         });
 
-        return view("myorder", compact('ordersAvailable'));
+        $responseRO = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->get('http://localhost:8080/api/queryallro');
+        $repairOrders = json_decode($responseRO->json()['response']);
+
+        $repairOrdersAvailable = array_filter($repairOrders, function ($item) use($org){
+            return ($item->Record->RequesterOrg == $org || $item->Record->RepairerOrg == $org);
+        });
+
+        return view("myorder", compact('purchaseOrdersAvailable', 'repairOrdersAvailable'));
     }
 
     public function update(Request $request, $id){
@@ -41,7 +50,7 @@ class OrderController extends Controller
         $token = $request->cookie('token');
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->postt('http://localhost:8080/api/repairorder/add/'.$id, [
+        ])->post('http://localhost:8080/api/repairorder/add/'.$id, [
             "owner" => $request->attributes->get('jwtEmail'),
         ]);
     
@@ -53,7 +62,7 @@ class OrderController extends Controller
         $token = $request->cookie('token');
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->put('http://localhost:8080/api/repairorder/quest/'.$id, [
+        ])->put('http://localhost:8080/api/repairorder/update/'.$id, [
             "updateby" => $request->attributes->get('jwtEmail'),
         ]);
     

@@ -17,6 +17,15 @@ if(!function_exists('checkBuyAccess')){
     }
 }
 
+if(!function_exists('checkUpdateAccess')){
+    function checkUpdateAccess($status) {
+        if($status = "Available" || $status == "Not Available"){
+            return true;
+        } 
+        return false;
+    }
+}
+
 if(!function_exists('checkOrderStatus')){
     function checkOrderStatus($status, $org, $buyerOrg, $sellerOrg) {
         if($status == "Waiting for Buyer Organization" && $org == $buyerOrg){
@@ -25,5 +34,29 @@ if(!function_exists('checkOrderStatus')){
             return true;
         }
         return false;
+    }
+}
+
+if(!function_exists('checkRepairOrderStatus')){
+    function checkRepairOrderStatus($status, $org, $requesterOrg, $repairerOrg) {
+        if($status == "Waiting for Requester Organization" && $org == $requesterOrg){
+            return true;
+        }else if ($status == "Waiting for Repairer Organization" && $org == $repairerOrg){
+            return true;
+        }else if ($status == "Repairing" && $org == $repairerOrg){
+            return true;
+        }
+        return false;
+    }
+}
+
+if(!function_exists('getHistoryClass')){
+    function getHistoryClass($asset) {
+        if($asset['PurchaseOrderReference']){
+            return "history-purchased";
+        } else if ($asset['RepairOrderReference']){
+            return "history-requestRepair";
+        }
+        return "history-default";
     }
 }

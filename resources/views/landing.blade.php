@@ -19,7 +19,7 @@
                 <td><a href="#" id="ownedBtn" class="text-decoration-none txt-blue">Owned Spare-part List</a></td>
               </tr>
               <tr>
-                <td><a href="#" id="availableBtn" class="text-decoration-none txt-blue">Spare-parts Avaiable</a></td>
+                <td><a href="#" id="availableBtn" class="text-decoration-none txt-blue">Spare-parts Available</a></td>
               </tr>
               @if ($jwtOrg == "manufacturer")
                 <tr>
@@ -47,9 +47,9 @@
                             <p class="text-muted mb-3 mt-0">{{$asset->Record->Timestamp}}</p>
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
-                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key] )}}'">Update</button>
+                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key])}}'" {{checkUpdateAccess($asset->Record->Status) ? "" : "disabled"}}>Update</button>
                               @if ($jwtOrg == "airline")
-                                <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest">Repair</button>
+                                <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{$asset->Record->Status == "Requesting Repair" ? "disabled" : ""}}>Repair</button>
                               @endif
                             </div>
                         </div>
@@ -74,6 +74,8 @@
                         <div class="spareparts__content--title">
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
                             <p class="text-muted mb-3 mt-0">{{$asset->RecordQty->Quantity}} pcs Left</p>
+                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Owner}}</p>
+                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Status}}</p>
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) && ($asset->RecordQty->Quantity > 0) ? "" : "disabled"}}>Buy</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>

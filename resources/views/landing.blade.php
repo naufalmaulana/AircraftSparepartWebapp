@@ -11,7 +11,7 @@
         <div class="col-md-3">
           <div class=" rounded  p-2 right-content">
             <div class="mb-3">
-              <h3 class="text-start">{{$jwtOrg}}</h3>
+              <h3 class="text-start">{{$jwtOrg}} - {{$jwtRole}}</h3>
               <p>{{$jwtEmail}}</p>
             </div>
             <table class="table border">
@@ -48,7 +48,9 @@
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key] )}}'">Update</button>
-                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest">Service</button>
+                              @if ($jwtOrg == "airline")
+                                <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest">Repair</button>
+                              @endif
                             </div>
                         </div>
                     </div>                  
@@ -73,7 +75,7 @@
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
                             <p class="text-muted mb-3 mt-0">{{$asset->RecordQty->Quantity}} pcs Left</p>
                             <div class="d-block">
-                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) ? "" : "disabled"}}>Buy</button>
+                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org, $jwtOrg) && ($asset->RecordQty->Quantity > 0) ? "" : "disabled"}}>Buy</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
                             </div>
@@ -114,6 +116,7 @@ $("#createBtn").on("click",function(){
 function changeBuyAction(id, name, number, weight, updateBy){
   $("#buyForm").attr('action', "/buy/" + id);
   $("#airlineBuyForm").attr('action', "/buy/" + id);
+  $("#serviceRequestForm").attr('action', "/repair/request/" + id);
   $("#nameInput").val(name);
   $("#numberInput").val(number);
   $("#weightInput").val(weight);

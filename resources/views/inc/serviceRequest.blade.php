@@ -11,9 +11,10 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos placeat iusto aliquid est alias doloribus aut molestiae fuga ipsam voluptatem! Ea vero ad velit eius omnis vitae officiis eligendi quia perspiciatis ratione? Iste quos aut soluta omnis dolor molestiae rerum dolorem vitae distinctio libero. Exercitationem veritatis quaerat nisi iure accusamus!
         </div>
         <div class="modal-footer justify-content-center">
-          {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button> --}}
-          <button id="orderBtn" type="button" class="btn bg-blue text-white fw-bold px-5" onclick="window.location.href='{{route('home')}}'">Agree</button>
+          <form id="serviceRequestForm" method="POST">
+            @csrf
+            <button type="submit" class="btn bg-blue text-white fw-bold px-5">Agree</button>
+           </form>
         </div>
       </div>
     </div>

@@ -29,11 +29,35 @@ class OrderController extends Controller
         $token = $request->cookie('token');
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->put('http://localhost:8080/api/order/update/'.$id, [
+        ])->put('http://localhost:8080/api/purchaseorder/update/'.$id, [
             "updateby" => $request->attributes->get('jwtEmail'),
         ]);
     
-        return redirect()->route('home');
+        return redirect()->route('myorder');
+    }
+
+    public function requestRepair(Request $request, $id){
+        $org = $request->attributes->get('jwtOrg');
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->postt('http://localhost:8080/api/repairorder/add/'.$id, [
+            "owner" => $request->attributes->get('jwtEmail'),
+        ]);
+    
+        return redirect()->route('myorder');
+    }
+
+    public function verifyRepair(Request $request, $id){
+        $org = $request->attributes->get('jwtOrg');
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->put('http://localhost:8080/api/repairorder/quest/'.$id, [
+            "updateby" => $request->attributes->get('jwtEmail'),
+        ]);
+    
+        return redirect()->route('myorder');
     }
 
     

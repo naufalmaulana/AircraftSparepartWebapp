@@ -47,12 +47,12 @@ class SparepartsController extends Controller
         $token = $request->cookie('token');
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
-        ])->post('http://localhost:8080/api/order/add/'.$id, [
+        ])->post('http://localhost:8080/api/purchaseorder/add/'.$id, [
             "quantity" => $request->quantity,
             "owner" => $request->attributes->get('jwtEmail'),
         ]);
     
-        return redirect()->route('home');
+        return redirect()->route('myorder');
     }
 
     public function add(Request $request){

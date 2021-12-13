@@ -20,8 +20,13 @@
                 </div>
                 <hr>
                 <ul class="px-0 mb-3" style="list-style-type:none">
-                    <li>Quantity: <span class="txt-blue gw-bold">{{$asset['Quantity']}} pcs</span></li>
+                    <li>Quantity: <span class="txt-blue gw-bold">{{$asset['AvailQty']}} pcs</span></li>
                     <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
+                    @if ($jwtOrg == "airline" && $asset['Org'] == "airline")
+                        <li>Flight Log: <span class="txt-blue gw-bold"><a href="{{$asset['FlightLog']}}">{{$asset['FlightLog']}}</a></span></li>
+                        <li>Next Overhaul: <span class="txt-blue gw-bold">{{$asset['NextOverhaul']}}</span></li>
+                        <li>Total Hours Spend: <span class="txt-blue gw-bold">{{$asset['TotalHoursSpend']}} hours</span></li>
+                    @endif
                     <li>Latest Update Date: <span class="txt-blue gw-bold">{{$asset['Timestamp']}}</span></li>
                 </ul>
                 <button class="btn bg-blue text-white btn-md px-5 rounded-pill fw-bold" onclick="window.location.href='{{route('history', ['id' => $id] )}}'">History</button>

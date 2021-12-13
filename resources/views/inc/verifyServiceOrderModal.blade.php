@@ -15,6 +15,7 @@
           <button type="button" class="btn btn-primary">Understood</button> --}}
           <form id="verifyServiceOrderForm" method="POST">
             @csrf
+            <input type="hidden" id="verifySOStatus" name="verifySOStatus">
             <button type="submit" class="btn bg-blue text-white fw-bold px-5">Agree</button>
          </form>
         </div>

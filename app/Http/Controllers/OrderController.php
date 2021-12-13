@@ -40,6 +40,7 @@ class OrderController extends Controller
             'Authorization' => 'Bearer '.$token,
         ])->put('http://localhost:8080/api/purchaseorder/update/'.$id, [
             "updateby" => $request->attributes->get('jwtEmail'),
+            "approve" => $request->verifyStatus
         ]);
     
         return redirect()->route('myorder');
@@ -64,6 +65,7 @@ class OrderController extends Controller
             'Authorization' => 'Bearer '.$token,
         ])->put('http://localhost:8080/api/repairorder/update/'.$id, [
             "updateby" => $request->attributes->get('jwtEmail'),
+            "approve" => $request->verifySOStatus
         ]);
     
         return redirect()->route('myorder');

@@ -13,7 +13,6 @@
                 <div class="mb-3">
                     <label for="capacityInput" class="form-label">Input Amount: </label>
                     <input type="number" class="form-control" id="capacityInput" aria-describedby="capacityHelp" name="quantity">
-                    <div id="capacityHelp" class="form-text">We'll never share your email with anyone else.</div>
                 </div>
             </div>
             <div class="modal-footer justify-content-center">

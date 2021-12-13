@@ -17,7 +17,9 @@ class SparepartsController extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/asset/detail/'.$id);
-        $asset = $response->json()['response'];
+        $responseJson = $response->json()['response'];
+        $asset = $responseJson[0];
+        $asset['AvailQty'] = $responseJson[1]['Quantity'];
 
         return view("sparepartDetails", compact('asset', 'id'));
     }
@@ -28,21 +30,33 @@ class SparepartsController extends Controller
             'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/asset/detail/'.$id);
         $asset = $response->json()['response'];
-
+        
         return view("sparepartUpdate", compact('asset', 'id'));
     }
 
     public function storeUpdate($id, Request $request){
-        $token = $request->cookie('token');
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer '.$token,
-        ])->put('http://localhost:8080/api/asset/update/'.$id, [
-            "name" => $request->name,
-            "number" => $request->number,
-            "quantity" => $request->qty,
-            "weight" => $request->weight,
-            "status" => $request->status,
-        ]);
+        if($request->attributes->get('jwtOrg') != "airline"){
+            $token = $request->cookie('token');
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->put('http://localhost:8080/api/asset/update/'.$id, [
+                "name" => $request->name,
+                "number" => $request->number,
+                "quantity" => $request->qty,
+                "weight" => $request->weight,
+                "status" => $request->status,
+            ]);
+        } else {
+            $token = $request->cookie('token');
+            $response = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->put('http://localhost:8080/api/asset/airline/update/'.$id, [
+                "nextOverhaul" => $request->nextOverhaul,
+                "flightLog" => $request->flightLog,
+                "totalHours" => $request->totalHours,
+                "status" => $request->status,
+            ]);
+        }
 
         return redirect()->route('home');;
     }

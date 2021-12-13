@@ -40,12 +40,13 @@
                           <th scope="row">{{$loop->iteration}}</th>
                           <td>{{$order->Record->ID}}</td>
                           <td>{{$order->Record->Timestamp}}</td>
-                          <td class="d-none d-md-table-cell">{{$order->Record->AssetID}}</td>
+                          <td class="d-none d-md-table-cell">{{$order->Record->AssetName}}</td>
                           <td>
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
                           <td>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}')" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg, $order->Record->SellerOrg) ? "" : "disabled"}}>Verify</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg, $order->Record->SellerOrg) ? "" : "disabled"}}>Verify</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg, $order->Record->SellerOrg) ? "" : "disabled"}}>Reject</button>
                           </td>
                         </tr>
                       @endforeach
@@ -70,12 +71,13 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$order->Record->ID}}</td>
                         <td>{{$order->Record->Timestamp}}</td>
-                        <td class="d-none d-md-table-cell">{{$order->Record->AssetID}}</td>
+                        <td class="d-none d-md-table-cell">{{$order->Record->AssetName}}</td>
                         <td>
                             <div class="text-success">{{$order->Record->Status}}</div>
                         </td>
                         <td>
-                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Verify</button>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Verify</button>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Reject</button>
                         </td>
                       </tr>
                     @endforeach
@@ -87,14 +89,15 @@
 </section>
 @include('inc.verifyOrderModal')
 @include('inc.verifyServiceOrderModal')
-@include('inc.actionbtnModal')
 @endsection
 
 @section('js')
 <script>
-  function changeVerifyAction(id){
+  function changeVerifyAction(id, approve){
     $("#verifyOrderForm").attr('action', "/update/order/" + id);
     $("#verifyServiceOrderForm").attr('action', "/repair/verify/" + id);
+    $("#verifyStatus").val(approve);
+    $("#verifySOStatus").val(approve);
   }
 
   $("#purchaseBtn").on("click",function(){

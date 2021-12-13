@@ -19,11 +19,13 @@ class HomeController extends Controller
             return true;
             //return $item->Record->Status == "Available";
         });
+        $assetsAvailable= array_reverse($assetsAvailable);
 
         $responseOwned = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/queryassetowned');
         $assetsOwned = json_decode($responseOwned->json()['response']);
+        $assetsOwned= array_reverse($assetsOwned);
         return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable'));
     }
 

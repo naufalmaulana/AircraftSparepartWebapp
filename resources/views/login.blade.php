@@ -9,7 +9,7 @@
                         <h4 class="fw-bold text-white mb-0 logo">LO<span class="txt-blue">GO</span></h4>
                     </div> --}}
                     <div class="text-start mb-5">
-                        <img src="/assets/logo3.svg" class="img-fluid" width="20%" alt="logo">
+                        <h1>AVIPAR-Chain</h1>
                     </div>
                 <h1 class="fw-bold">Sign In With Your <br> Account</h1>
                 <p>Didn't have an account? <a href="{{ route('register') }}" class="txt-blue text-decoration-none">Sign up</a></p>

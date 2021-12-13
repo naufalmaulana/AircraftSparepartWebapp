@@ -3,7 +3,7 @@
     <div class="container-xxl">
       <!-- navbar brand / title -->
       <a class="navbar-brand col-md-2" href="{{ route('home') }}">
-        <img src="/assets/logo4.svg" class="nav-logo" width="70" height="70" alt="car.go logo">
+        <h1>AVIPAR-Chain</h1>
       </a>
       <!-- toggle button for mobile nav -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">

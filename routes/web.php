@@ -37,8 +37,6 @@ Route::middleware('auth.JWT')->group(function () {
     Route::get('/MyOrder','App\Http\Controllers\OrderController@myorder')->name('myorder');
     Route::get('/OwnedItemDetails','App\Http\Controllers\OrderController@ownedDetails')->name('ownedDetails');
     Route::get('/MaintenanceList','App\Http\Controllers\MaintenanceController@maintenance')->name('maintenance');
-    Route::get('/tracking','App\Http\Controllers\TrackingController@tracking')->name('tracking');
-    Route::get('/TrackingOrder','App\Http\Controllers\TrackingController@trackingOrder')->name('trackingOrder');
 
 });
 

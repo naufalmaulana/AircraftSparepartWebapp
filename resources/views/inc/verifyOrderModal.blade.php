@@ -1,5 +1,5 @@
   <!-- Modal -->
-  <div class="modal fade p-5" id="verifyOrderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="verifyOrderLabel" aria-hidden="true">
+  <div class="modal fade p-5" id="verifyOrderModal" tabindex="-1" aria-labelledby="verifyOrderLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content px-5">
         <div class="modal-header d-block text-center">
@@ -7,7 +7,7 @@
             <h5 class="modal-title fw-bold" id="verifyOrderLabel">Verify Order</h5>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
-        <div class="modal-body">
+        <div class="modal-body text-center">
            Are you sure that you want to verify this order?
         </div>
         <div class="modal-footer justify-content-center">

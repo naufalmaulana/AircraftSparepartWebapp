@@ -23,9 +23,11 @@ class AuthenticateJWT
             $tokenPayload = base64_decode($tokenParts[1]);
             $jwtHeader = json_decode($tokenHeader);
             $jwtPayload = json_decode($tokenPayload);
-            $request->attributes->add(['jwtEmail' => $jwtPayload->username, 'jwtOrg' => $jwtPayload->orgName, 'jwtRole' => $jwtPayload->role]);
+            $request->attributes->add(['jwtEmail' => $jwtPayload->username, 'jwtOrg' => $jwtPayload->orgID, 'jwtOrgName' => $jwtPayload->orgName, 'jwtOrgType' => $jwtPayload->orgType, 'jwtRole' => $jwtPayload->role]);
             view()->share('jwtEmail', $jwtPayload->username);
-            view()->share('jwtOrg', $jwtPayload->orgName);
+            view()->share('jwtOrg', $jwtPayload->orgID);
+            view()->share('jwtOrgName', $jwtPayload->orgName);
+            view()->share('jwtOrgType', $jwtPayload->orgType);
             view()->share('jwtRole', $jwtPayload->role);
             return $next($request);
         }

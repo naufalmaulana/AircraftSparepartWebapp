@@ -45,8 +45,8 @@
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
                           <td>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg, $order->Record->SellerOrg) ? "" : "disabled"}}>Verify</button>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg, $order->Record->SellerOrg) ? "" : "disabled"}}>Reject</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID) ? "" : "disabled"}}>Verify</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID) ? "" : "disabled"}}>Reject</button>
                           </td>
                         </tr>
                       @endforeach
@@ -76,8 +76,8 @@
                             <div class="text-success">{{$order->Record->Status}}</div>
                         </td>
                         <td>
-                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Verify</button>
-                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg, $order->Record->RepairerOrg) ? "" : "disabled"}}>Reject</button>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Verify</button>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Reject</button>
                         </td>
                       </tr>
                     @endforeach

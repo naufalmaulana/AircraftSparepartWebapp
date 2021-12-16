@@ -18,7 +18,7 @@ class OrderController extends Controller
         $orders = json_decode($response->json()['response']);
 
         $purchaseOrdersAvailable = array_filter($orders, function ($item) use($org){
-            return ($item->Record->BuyerOrg == $org || $item->Record->SellerOrg == $org);
+            return ($item->Record->BuyerOrg->ID == $org || $item->Record->SellerOrg->ID == $org);
         });
 
         $responseRO = Http::withHeaders([
@@ -27,7 +27,7 @@ class OrderController extends Controller
         $repairOrders = json_decode($responseRO->json()['response']);
 
         $repairOrdersAvailable = array_filter($repairOrders, function ($item) use($org){
-            return ($item->Record->RequesterOrg == $org || $item->Record->RepairerOrg == $org);
+            return ($item->Record->RequesterOrg->ID == $org || $item->Record->RepairerOrg->ID == $org);
         });
 
         return view("myorder", compact('purchaseOrdersAvailable', 'repairOrdersAvailable'));

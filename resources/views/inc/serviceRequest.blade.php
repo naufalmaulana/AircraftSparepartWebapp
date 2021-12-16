@@ -1,5 +1,5 @@
   <!-- Modal -->
-  <div class="modal fade p-5" id="serviceRequest" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade p-5" id="serviceRequest"  tabindex="-1" aria-labelledby="serviceRequestLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content px-5">
         <div class="modal-header d-block text-center">
@@ -7,8 +7,8 @@
             <h5 class="modal-title fw-bold" id="staticBackdropLabel">Maintenance Requested</h5>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
-        <div class="modal-body">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos placeat iusto aliquid est alias doloribus aut molestiae fuga ipsam voluptatem! Ea vero ad velit eius omnis vitae officiis eligendi quia perspiciatis ratione? Iste quos aut soluta omnis dolor molestiae rerum dolorem vitae distinctio libero. Exercitationem veritatis quaerat nisi iure accusamus!
+        <div class="modal-body text-center">
+            Your maintenance has been requested!
         </div>
         <div class="modal-footer justify-content-center">
           <form id="serviceRequestForm" method="POST">

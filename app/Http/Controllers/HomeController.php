@@ -26,7 +26,17 @@ class HomeController extends Controller
         ])->get('http://localhost:8080/api/queryassetowned');
         $assetsOwned = json_decode($responseOwned->json()['response']);
         $assetsOwned= array_reverse($assetsOwned);
-        return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable'));
+
+        $userList = [];
+        if($request->attributes->get('jwtRole') == "admin"){
+            $responseUser = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->get('http://localhost:8080/api/queryallusers');
+            $userList = json_decode($responseUser->json()['response']);
+            $userList = array_reverse($userList);    
+        }
+    
+        return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable','userList'));
     }
 
     public function mroLanding(){

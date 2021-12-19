@@ -7,10 +7,12 @@
             <h5 class="modal-title fw-bold" id="staticBackdropLabel">Role Updated</h5>
         </div>
         <div class="modal-body text-center">
-            The role of this user has been updated !
+            Are you sure you want this user's role?
         </div>
         <div class="modal-footer justify-content-center">
-          <form id="buyForm" method="POST">
+          <form id="roleForm" method="POST">
+            @csrf
+            <input type="hidden" id="roleInput" name="roleInput">
             <button type="submit" class="btn bg-blue text-white fw-bold px-5">Agree</button>
          </form>
         </div>

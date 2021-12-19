@@ -16,6 +16,7 @@ Route::get('/login','App\Http\Controllers\UserController@login')->name('login');
 Route::get('/register','App\Http\Controllers\UserController@register')->name('register');
 Route::post('/register', 'App\Http\Controllers\UserController@storeRegister')->name('storeRegister');
 Route::post('/login', 'App\Http\Controllers\UserController@storeLogin')->name('storeLogin');
+Route::post('/update/user/{id}', 'App\Http\Controllers\UserController@updateRole')->name('userUpdate');
 
 Route::middleware('auth.JWT')->group(function () {
     Route::get('/','App\Http\Controllers\HomeController@landing')->name('home');

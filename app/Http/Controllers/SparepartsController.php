@@ -29,7 +29,8 @@ class SparepartsController extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
         ])->get('http://localhost:8080/api/asset/detail/'.$id);
-        $asset = $response->json()['response'];
+        $assetResponse = $response->json()['response'];
+        $asset = $assetResponse[0];
         
         return view("sparepartUpdate", compact('asset', 'id'));
     }

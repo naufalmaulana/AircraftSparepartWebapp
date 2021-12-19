@@ -53,6 +53,17 @@ class UserController extends Controller
        
     }
 
+    public function updateRole($id, Request $request){
+        $token = $request->cookie('token');
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer '.$token,
+        ])->put('http://localhost:8080/api/user/update/'.$id, [
+            "role" => $request->roleInput,
+        ]);
+
+        return redirect()->route('home');;
+    }
+
     public function forgotPassword(){
         return view("forgotPassword");
     }

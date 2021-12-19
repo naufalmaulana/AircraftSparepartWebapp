@@ -28,9 +28,11 @@
                   <td><a href="#" id="createBtn" class="text-decoration-none txt-blue">Add New Spare-parts</a></td>
                 </tr>
               @endif
+              @if ($jwtRole == "admin")
               <tr>
                 <td><a href="#" id="userlistBtn" class="text-decoration-none txt-blue">User List</a></td>
               </tr>
+              @endif
             </table>
           </div>
         </div>
@@ -49,7 +51,7 @@
                     <div class="py-2 spareparts__content">
                         <div class="spareparts__content--title">
                             <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Timestamp}}</p>
+                            <p class="text-muted mb-3 mt-0">{{$asset->Record->CreateDate}}</p>
                             <div class="d-block">
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
                               <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key])}}'" {{checkUpdateAccess($asset->Record->Status) && ($asset->Record->Quantity == $asset->RecordQty->Quantity) ? "" : "disabled"}}>Update</button>
@@ -105,58 +107,21 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th class="txt-black" scope="row">1</th>
-                  <td>MANUFACTURER 1</td>
-                  <td>                    
-                    <div class="rounded">
-                      <select id="organization" name="organization" class="form-select">
-                        <option value="manufacturer">MEMBER</option>
-                        <option value="mro">SUPERVISOR</option>
-                      </select>
-                    </div>
-                  </td>
-                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
-                </tr>
-                <tr>
-                  <th class="txt-black" scope="row">2</th>
-                  <td>VENDOR 1</td>
-                  <td>                    
-                    <div class="rounded">
-                      <select id="organization" name="organization" class="form-select">
-                        <option value="manufacturer">MEMBER</option>
-                        <option value="mro">SUPERVISOR</option>
-                      </select>
-                    </div>
-                  </td>
-                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
-                </tr>
-                <tr>
-                  <th class="txt-black" scope="row">3</th>
-                  <td>MRO 1</td>
-                  <td>                    
-                    <div class="rounded">
-                      <select id="organization" name="organization" class="form-select">
-                        <option value="manufacturer">MEMBER</option>
-                        <option value="mro">SUPERVISOR</option>
-                      </select>
-                    </div>
-                  </td>
-                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
-                </tr>
-                <tr>
-                  <th class="txt-black" scope="row">4</th>
-                  <td>AIRLINE 1</td>
-                  <td>                    
-                    <div class="rounded">
-                      <select id="organization" name="organization" class="form-select">
-                        <option value="manufacturer">MEMBER</option>
-                        <option value="mro">SUPERVISOR</option>
-                      </select>
-                    </div>
-                  </td>
-                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
-                </tr>
+                @foreach ($userList as $user)
+                  <tr>
+                    <th class="txt-black" scope="row">1</th>
+                    <td>{{$user->Record->Name}}</td>
+                    <td>                    
+                      <div class="rounded">
+                        <select id="role{{$user->Key}}" name="role{{$user->Key}}" class="form-select">
+                          <option {{$user->Record->Role == "member" ? "selected" : ""}} value="member">MEMBER</option>
+                          <option {{$user->Record->Role == "supervisor" ? "selected" : ""}}  value="supervisor">SUPERVISOR</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal" onclick="changeRoleAction('{{$user->Key}}')">Update Role</button></td>
+                  </tr>
+                @endforeach
               </tbody>
             </table>
           </div>
@@ -201,6 +166,11 @@ function changeBuyAction(id, name, number, weight, updateBy){
   $("#numberInput").val(number);
   $("#weightInput").val(weight);
   $("#updateByInput").val(updateBy);
+}
+
+function changeRoleAction(id){
+  $("#roleForm").attr('action', "/update/user/" + id);
+  $("#roleInput").val($("#role" + id).val());
 }
 
 function resetDiv(){

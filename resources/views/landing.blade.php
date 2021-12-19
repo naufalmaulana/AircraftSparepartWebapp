@@ -28,6 +28,9 @@
                   <td><a href="#" id="createBtn" class="text-decoration-none txt-blue">Add New Spare-parts</a></td>
                 </tr>
               @endif
+              <tr>
+                <td><a href="#" id="userlistBtn" class="text-decoration-none txt-blue">User List</a></td>
+              </tr>
             </table>
           </div>
         </div>
@@ -90,6 +93,73 @@
             @endforeach
           </div>
           @include('inc.createSparepart')
+          <div id="userlist" class="row justify-content-start align-items-center g-2" style="display: none;">
+            <h3 class="text-start mb-3">User List</h3>
+            <table class="table">
+              <thead class="thead bg-black text-white">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="txt-black" scope="row">1</th>
+                  <td>MANUFACTURER 1</td>
+                  <td>                    
+                    <div class="rounded">
+                      <select id="organization" name="organization" class="form-select">
+                        <option value="manufacturer">MEMBER</option>
+                        <option value="mro">SUPERVISOR</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
+                </tr>
+                <tr>
+                  <th class="txt-black" scope="row">2</th>
+                  <td>VENDOR 1</td>
+                  <td>                    
+                    <div class="rounded">
+                      <select id="organization" name="organization" class="form-select">
+                        <option value="manufacturer">MEMBER</option>
+                        <option value="mro">SUPERVISOR</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
+                </tr>
+                <tr>
+                  <th class="txt-black" scope="row">3</th>
+                  <td>MRO 1</td>
+                  <td>                    
+                    <div class="rounded">
+                      <select id="organization" name="organization" class="form-select">
+                        <option value="manufacturer">MEMBER</option>
+                        <option value="mro">SUPERVISOR</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
+                </tr>
+                <tr>
+                  <th class="txt-black" scope="row">4</th>
+                  <td>AIRLINE 1</td>
+                  <td>                    
+                    <div class="rounded">
+                      <select id="organization" name="organization" class="form-select">
+                        <option value="manufacturer">MEMBER</option>
+                        <option value="mro">SUPERVISOR</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td><button class="btn bg-blue text-white rounded-pill px-5" data-bs-toggle="modal" data-bs-target="#roleModal">Update Role</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -97,6 +167,7 @@
 @include('inc.orderRequestedModal')
 @include('inc.airlineBuyModal')
 @include('inc.serviceRequest')
+@include('inc.roleUpdateModal')
 @endsection
 
 @section('js')
@@ -117,6 +188,11 @@ $("#createBtn").on("click",function(){
   $("#create").show();
 });
 
+$("#userlistBtn").on("click",function(){
+  resetDiv();
+  $("#userlist").show();
+});
+
 function changeBuyAction(id, name, number, weight, updateBy){
   $("#buyForm").attr('action', "/buy/" + id);
   $("#airlineBuyForm").attr('action', "/buy/" + id);
@@ -131,6 +207,7 @@ function resetDiv(){
   $("#sale").hide();
   $("#owned").hide();
   $("#create").hide();
+  $("userlist").hide();
 }
 </script>
 @endsection

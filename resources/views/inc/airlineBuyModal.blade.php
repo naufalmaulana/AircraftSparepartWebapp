@@ -1,7 +1,10 @@
   <!-- Modal -->
-  <div class="modal fade p-5" id="airlineBuyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="airlineBuyLabel" aria-hidden="true">
+  <div class="modal fade p-5" id="airlineBuyModal" tabindex="-1" aria-labelledby="airlineBuyLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content px-5">
+        <div class="py-4 text-end">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
+        </div>
         <div class="modal-header d-block text-center">
             <img class="mb-3" src="/assets/circle-check.svg" alt="">
             <h5 class="modal-title fw-bold" id="airlineBuyLabel">Buy Spare Part</h5>

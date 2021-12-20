@@ -22,7 +22,7 @@
                 <ul class="px-0 mb-3" style="list-style-type:none">
                     <li>Quantity: <span class="txt-blue gw-bold">{{$asset['AvailQty']}} pcs</span></li>
                     <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
-                    @if ($jwtOrg == "airline" && $asset['Org'] == "airline")
+                    @if ($jwtOrgType == "airline" && $asset['Org']['Type'] == "airline")
                         <li>Flight Log: <span class="txt-blue gw-bold"><a href="{{$asset['FlightLog']}}">{{$asset['FlightLog']}}</a></span></li>
                         <li>Next Overhaul: <span class="txt-blue gw-bold">{{$asset['NextOverhaul']}}</span></li>
                         <li>Total Hours Spend: <span class="txt-blue gw-bold">{{$asset['TotalHoursSpend']}} hours</span></li>

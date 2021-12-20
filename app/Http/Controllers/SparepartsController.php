@@ -36,7 +36,7 @@ class SparepartsController extends Controller
     }
 
     public function storeUpdate($id, Request $request){
-        if($request->attributes->get('jwtOrg') != "airline"){
+        if($request->attributes->get('jwtOrgType') != "airline"){
             $token = $request->cookie('token');
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer '.$token,

@@ -14,7 +14,7 @@
             <div class="col-md-6">
                 <form method="POST" action="{{route('storeUpdate', ['id' => $asset['ID']])}}">
                     @csrf
-                    @if ($jwtOrg != "airline")
+                    @if ($jwtOrgType != "airline")
                         <div>
                             <div class="row  align-items-center">
                                 <div class="col-md-4">

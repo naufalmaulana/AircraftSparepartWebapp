@@ -16,9 +16,11 @@
           <li class="nav-item ">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('home') }}">Home</a>
           </li>
+          @if($jwtRole != "admin")
           <li class="nav-item">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('myorder') }}">My Orders</a>
           </li>
+          @endif
           {{-- <li class="nav-item">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('cart') }}"><i class="bi bi-cart-fill"></i></a>
           </li> --}}
@@ -28,7 +30,7 @@
               <i class="bi bi-person-fill"></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              
               <li><a class="dropdown-item" href="{{ route('login') }}">Log out</a></li>
             </ul>
           </li>

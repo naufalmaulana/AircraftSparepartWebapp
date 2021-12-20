@@ -27,7 +27,10 @@ if(!function_exists('checkUpdateAccess')){
 }
 
 if(!function_exists('checkOrderStatus')){
-    function checkOrderStatus($status, $org, $buyerOrg, $sellerOrg) {
+    function checkOrderStatus($status, $org, $buyerOrg, $sellerOrg, $role) {
+        if($role != "supervisor"){
+            return false;
+        }
         if($status == "Waiting for Buyer Organization" && $org == $buyerOrg){
             return true;
         }else if ($status == "Waiting for Seller Organization" && $org == $sellerOrg){
@@ -58,5 +61,14 @@ if(!function_exists('getHistoryClass')){
             return "history-requestRepair";
         }
         return "history-default";
+    }
+}
+
+if(!function_exists('getOrderedQuantity')){
+    function getOrderedQuantity($leftQty, $qty) {
+        if($leftQty == $qty){
+            return "";
+        } 
+        return "(".($qty - $leftQty)." pcs ordered)";
     }
 }

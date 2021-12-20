@@ -39,13 +39,17 @@
                       <input type="password" id="retype-password" class="form-control validate" />
                       <i class="bi bi-eye-fill" id="toggleRtypePasswordForm" style="margin-left: -30px; cursor: pointer; margin-top:10px;"></i>
                     </div>
-                    <label for="organization" class="form-label">Organization Type</label>
+                    <label for="organization" class="form-label">Organization</label>
                     <div class=" mb-3 shadow rounded ">
                       <select id="organization" name="organization" class="form-select">
-                        <option value="manufacturer">Manufacturer</option>
-                        <option value="mro">MRO</option>
-                          <option value="vendor">Vendor</option>
-                          <option value="airline">Airline</option>
+                        <option value="cirbus">Cirbus</option>
+                        <option value="soeing">Soeing</option>
+                        <option value="nataair">Nata Air</option>
+                        <option value="lycanairsa">Lycan Air SA</option>
+                        <option value="cengkarengairwayengineering">Cengkareng Airway Engineering</option>
+                        <option value="semco">Semco</option>
+                        <option value="aviparairline">Avipar Airline</option>
+                        <option value="pamulangairway">Pamulang Airway</option>
                           {{-- <option value="Maintenance, Repair and Operations (MRO)">Maintenance, Repair and Operations (MRO)</option> --}}
                       </select>
                     </div>

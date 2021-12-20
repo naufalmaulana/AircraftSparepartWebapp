@@ -12,14 +12,9 @@
           My Orders
         </h1>
         <div class="col mb-4">
-          <button class="btn btn-dark" id="purchaseBtn">Purchase Orders</button>
+          <button class="btn btn-primary active" id="purchaseBtn">Purchase Orders</button>
           <button class="btn btn-dark" id="repairBtn">Repair Orders</button>
         </div>
-        <form class="text-center" action="">
-          <div class="input-group text-center justify-content-center ">
-            <input class="rounded py-1 w-25" type="text" placeholder="Search Order">
-          </div>
-        </form>
       </div>
         <div class="row justify-content-center align-items-center">
             <div class="col-md-10 rounded shadow" id="purchaseOrderContainer">
@@ -29,7 +24,7 @@
                         <th scope="col">No</th>
                         <th scope="col">Order ID</th>
                         <th scope="col">Date</th>
-                        <th class="d-none d-md-table-cell" scope="col">Spare-part Id</th>
+                        <th class="d-none d-md-table-cell" scope="col">Spare-part Name</th>
                         <th scope="col">Status</th>
                         <th scope="col">Action</th>
                       </tr>
@@ -40,13 +35,13 @@
                           <th scope="row">{{$loop->iteration}}</th>
                           <td>{{$order->Record->ID}}</td>
                           <td>{{$order->Record->Timestamp}}</td>
-                          <td class="d-none d-md-table-cell">{{$order->Record->AssetName}}</td>
+                          <td class="d-none d-md-table-cell"><a href="{{route('sparepartDetail',['id' => $order->Record->AssetID])}}">{{$order->Record->AssetName}}</a></td>
                           <td>
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
                           <td>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID) ? "" : "disabled"}}>Verify</button>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID) ? "" : "disabled"}}>Reject</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Verify</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Reject</button>
                           </td>
                         </tr>
                       @endforeach
@@ -60,7 +55,7 @@
                       <th scope="col">No</th>
                       <th scope="col">Order ID</th>
                       <th scope="col">Date</th>
-                      <th class="d-none d-md-table-cell" scope="col">Spare-part ID</th>
+                      <th class="d-none d-md-table-cell" scope="col">Spare-part Name</th>
                       <th scope="col">Status</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -71,7 +66,7 @@
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$order->Record->ID}}</td>
                         <td>{{$order->Record->Timestamp}}</td>
-                        <td class="d-none d-md-table-cell">{{$order->Record->AssetName}}</td>
+                        <td class="d-none d-md-table-cell"><a href="{{route('sparepartDetail',['id' => $order->Record->AssetID])}}">{{$order->Record->AssetName}}</a></td>
                         <td>
                             <div class="text-success">{{$order->Record->Status}}</div>
                         </td>
@@ -102,11 +97,21 @@
 
   $("#purchaseBtn").on("click",function(){
     resetDiv();
+    $("#purchaseBtn").addClass("btn-primary active");
+    $("#purchaseBtn").removeClass("btn-dark");
+
+    $("#repairBtn").removeClass("btn-primary active");
+    $("#repairBtn").addClass("btn-dark");
     $("#purchaseOrderContainer").show();
   });
 
   $("#repairBtn").on("click",function(){
     resetDiv();
+    $("#repairBtn").addClass("btn-primary active");
+    $("#repairBtn").removeClass("btn-dark");
+
+    $("#purchaseBtn").removeClass("btn-primary active");
+    $("#purchaseBtn").addClass("btn-dark");
     $("#repairOrderContainer").show();
   });
 

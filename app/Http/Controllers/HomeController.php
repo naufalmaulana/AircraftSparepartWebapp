@@ -16,8 +16,7 @@ class HomeController extends Controller
         $assets = json_decode($response->json()['response']);
 
         $assetsAvailable= array_filter($assets, function ($item) {
-            return true;
-            //return $item->Record->Status == "Available";
+            return $item->Record->Status == "Available";
         });
         $assetsAvailable= array_reverse($assetsAvailable);
 

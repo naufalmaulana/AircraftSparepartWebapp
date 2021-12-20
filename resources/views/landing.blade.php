@@ -11,13 +11,16 @@
         <div class="col-md-3">
           <div class=" rounded  p-2 right-content">
             <div class="mb-3">
-              <h3 class="text-start">{{$jwtOrgName}} - {{$jwtRole}}</h3>
-              <p>{{$jwtEmail}}</p>
+              <h3 class="text-start" style="word-wrap: anywhere">{{$jwtOrgName}}</h3>
+              <p class="mb-0 mt-2">Email: {{$jwtEmail}}</p>
+              <p>Role: {{ucfirst($jwtRole)}}</p>
             </div>
             <table class="table border">
+              @if ($jwtRole != "admin")
               <tr>
                 <td><a href="#" id="ownedBtn" class="text-decoration-none txt-blue">Owned Spare-part List</a></td>
               </tr>
+              @endif
               @if ($jwtOrgType != "manufacturer")
               <tr>
                 <td><a href="#" id="availableBtn" class="text-decoration-none txt-blue">Spare-part(s) For Sale</a></td>
@@ -37,62 +40,69 @@
           </div>
         </div>
         <div class="col-md-9">
-          <div id="owned" class="row justify-content-start align-items-center g-2">
+          <div id="owned" class="row justify-content-start align-items-center g-2" style="{{$jwtRole == 'admin' ? 'display: none;' : ''}}">
             <h3 class="text-start mb-3">Owned Spare-part(s)</h3>
-            @isset($assetOwned)
+            @isset($assetsOwned)
                 <h1>You do not owned any spare parts</h1>
             @endisset
+            <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($assetsOwned as $asset)
-              <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
-                <div class="position-relative border bg-white p-1 rounded spareparts">
-                    <div class="positon-relative overflow-hidden mx-auto spareparts__thumbnail">
-                        <img class="w-100 h-auto" src="/assets/sparepart-dummy1.jpg" alt="">
-                    </div>
-                    <div class="py-2 spareparts__content">
-                        <div class="spareparts__content--title">
-                            <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->CreateDate}}</p>
-                            <div class="d-block">
-                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
-                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key])}}'" {{checkUpdateAccess($asset->Record->Status) && ($asset->Record->Quantity == $asset->RecordQty->Quantity) ? "" : "disabled"}}>Update</button>
-                              @if ($jwtOrgType == "airline")
-                                <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{$asset->Record->Status == "Requesting Repair" ? "disabled" : ""}}>Repair</button>
-                              @endif
-                            </div>
-                        </div>
-                    </div>                  
+              <div class="col">
+                <div class="card">
+                    <img class="card-img-top" src="/assets/sparepart-dummy1.jpg" alt="">
+                    <div class="card-body">
+                      <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                    </div>   
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{$asset->RecordQty->Quantity}} pcs left {{getOrderedQuantity($asset->RecordQty->Quantity, $asset->Record->Quantity)}}</li>
+                      <li class="list-group-item">Status: {{$asset->Record->Status}}</li>
+                    </ul>
+                    <div class="card-body">
+                      <div class="d-block">
+                        <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
+                        <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartUpdate', ['id' => $asset->Key])}}'" {{checkUpdateAccess($asset->Record->Status) && ($asset->Record->Quantity == $asset->RecordQty->Quantity) ? "" : "disabled"}}>Update</button>
+                        @if ($jwtOrgType == "airline")
+                          <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#serviceRequest" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}', {{$asset->RecordQty->Quantity}})" {{$asset->Record->Status == "Requesting Repair" ? "disabled" : ""}}>Repair</button>
+                        @endif
+                      </div>
+                    </div>  
+                    <div class="card-footer text-muted">
+                      <p class="text-muted mb-3 mt-0">Created on: {{$asset->Record->CreateDate}}</p>
+                    </div>            
                 </div>
               </div>
             @endforeach
+              </div>
           </div>
-          <div id="sale" class="row justify-content-start align-items-center g-2" style="display: none;">
+          <div id="sale" class="row justify-content-start align-items-center g-2" style="{{$jwtRole != 'admin' ? 'display: none;' : ''}}">
             <h3 class="text-start mb-3">Spare-part(s) For Sale</h3>
             @empty($assetsAvailable)
               <h1>There are no spare parts available</h1>
             @endempty
+            <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($assetsAvailable as $asset)
-              <div class="col-xl-4 col-lg-5 col-md-5 col-sm-12 col-6 c-pointer">
-                <div class="position-relative border bg-white p-1 rounded spareparts">
-                    <div class="positon-relative overflow-hidden mx-auto spareparts__thumbnail">
-                        <img class="w-100 h-auto" src="/assets/sparepart-dummy1.jpg" alt="">
-                    </div>
-
-                    <div class="py-2 spareparts__content">
-                        <div class="spareparts__content--title">
-                            <p class="fw-bold mt-0">{{$asset->Record->Name}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->RecordQty->Quantity}} pcs Left</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Owner}}</p>
-                            <p class="text-muted mb-3 mt-0">{{$asset->Record->Status}}</p>
-                            <div class="d-block">
-                              <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}')" {{checkBuyAccess($asset->Record->Org->Type, $jwtOrgType) && ($asset->RecordQty->Quantity > 0) ? "" : "disabled"}}>Buy</button>
-                              <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
-                              {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
-                            </div>
-                        </div>
-                    </div>                  
+              <div class="col">
+                <div class="card">
+                    <img class="card-img-top" src="/assets/sparepart-dummy1.jpg" alt="">
+                    <div class="card-body">
+                      <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                    </div>    
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{$asset->RecordQty->Quantity}} pcs Left</li>
+                      <li class="list-group-item">Owned by <b>{{$asset->Record->Org->Name}}</b></li>
+                      <li class="list-group-item">Status: {{$asset->Record->Status}}</li>
+                    </ul>       
+                    <div class="card-body">
+                      <div class="d-block">
+                        <button class="btn bg-blue text-white btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#airlineBuyModal" onclick="changeBuyAction('{{$asset->Key}}', '{{$asset->Record->Name}}', '{{$asset->Record->Number}}', '{{$asset->Record->Weight}}', '{{$asset->Record->Owner}}', {{$asset->RecordQty->Quantity}})" {{checkBuyAccess($asset->Record->Org->Type, $jwtOrgType) && ($asset->RecordQty->Quantity > 0) ? "" : "disabled"}}>Buy</button>
+                        <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('sparepartDetail',['id' => $asset->Key])}}'">Details</button>
+                        {{-- <button class="btn bg-blue text-white btn-sm" onclick="window.location.href='{{route('tracking')}}'">Track History</button> --}}
+                      </div>
+                    </div>       
                 </div>
               </div>
             @endforeach
+            </div>
           </div>
           @include('inc.createSparepart')
           <div id="userlist" class="row justify-content-start align-items-center g-2" style="display: none;">
@@ -109,7 +119,7 @@
               <tbody>
                 @foreach ($userList as $user)
                   <tr>
-                    <th class="txt-black" scope="row">1</th>
+                    <th class="txt-black" scope="row">{{$loop->iteration}}</th>
                     <td>{{$user->Record->Name}}</td>
                     <td>                    
                       <div class="rounded">
@@ -158,12 +168,14 @@ $("#userlistBtn").on("click",function(){
   $("#userlist").show();
 });
 
-function changeBuyAction(id, name, number, weight, updateBy){
+function changeBuyAction(id, name, number, weight, updateBy, quantity){
   $("#buyForm").attr('action', "/buy/" + id);
   $("#airlineBuyForm").attr('action', "/buy/" + id);
   $("#serviceRequestForm").attr('action', "/repair/request/" + id);
   $("#nameInput").val(name);
   $("#numberInput").val(number);
+  $("#capacityInput").attr("Max", quantity);
+  $("#capacityInput").attr("Placeholder", quantity);
   $("#weightInput").val(weight);
   $("#updateByInput").val(updateBy);
 }
@@ -177,7 +189,7 @@ function resetDiv(){
   $("#sale").hide();
   $("#owned").hide();
   $("#create").hide();
-  $("userlist").hide();
+  $("#userlist").hide();
 }
 </script>
 @endsection

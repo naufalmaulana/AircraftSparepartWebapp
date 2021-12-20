@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <div class="mb-3">
                     <label for="capacityInput" class="form-label">Input Amount: </label>
-                    <input type="number" class="form-control" id="capacityInput" aria-describedby="capacityHelp" name="quantity">
+                    <input type="number" class="form-control" id="capacityInput" aria-describedby="capacityHelp" name="quantity" min="1">
                 </div>
             </div>
             <div class="modal-footer justify-content-center">

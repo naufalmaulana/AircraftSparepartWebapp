@@ -11,15 +11,15 @@
             <div class=" mb-4 rounded">
               <input name="number" type="text" id="number" class="form-control validate" />
             </div>
-            {{-- <label for="types" class="form-label txt-blue">Spare-Part Type</label>
+            <label for="types" class="form-label txt-blue">Spare-Part Category</label>
             <div class=" mb-3  rounded ">
               <select name="types" id="airport" class="form-select">
-                  <option value="Hydraulic press">Hydraulic press</option>
-                  <option value="Pipe">Pipe</option>
-                  <option value="Wings">Wings</option>
+                  <option value="Electric Components">Electric Components</option>
+                  <option value="Flight Instruments">Flight Instruments</option>
+                  <option value="Mechanical Components">Mechanical Components</option>
               </select>
             </div>
-            <label for="model" class="form-label txt-blue">Spare-part Model</label>
+            {{-- <label for="model" class="form-label txt-blue">Spare-part Model</label>
             <div class=" mb-3  rounded">
               <input type="text" id="model" class="form-control" />
             </div> --}}

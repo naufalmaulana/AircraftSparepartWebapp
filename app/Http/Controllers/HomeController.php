@@ -34,8 +34,16 @@ class HomeController extends Controller
             $userList = json_decode($responseUser->json()['response']);
             $userList = array_reverse($userList);    
         }
-    
-        return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable','userList'));
+
+        $categories = [];
+        if($request->attributes->get('jwtOrgType') == "manufacturer"){
+            $responseCategory = Http::withHeaders([
+                'Authorization' => 'Bearer '.$token,
+            ])->get('http://localhost:8080/api/queryallcategories');
+            $categories = json_decode($responseCategory->json()['response']);
+            $categories = array_reverse($categories);    
+        }
+        return view("landing", compact('assets', 'assetsOwned', 'assetsAvailable','userList','categories'));
     }
 
     public function mroLanding(){

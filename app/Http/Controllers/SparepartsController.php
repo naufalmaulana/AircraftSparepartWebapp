@@ -93,7 +93,9 @@ class SparepartsController extends Controller
             "name" => $request->name,
             "number" => $request->number, 
             "quantity" => $request->qty, 
-            "weight" => $request->weight
+            "weight" => $request->weight,
+            "desc" => $request->description,
+            "category" => $request->category
         ]);
 
         return redirect()->route('home');

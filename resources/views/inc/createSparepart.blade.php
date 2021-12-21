@@ -13,12 +13,11 @@
             </div>
             <label for="types" class="form-label txt-blue">Spare-Part Category</label>
             <div class=" mb-3  rounded ">
-              <select name="types" id="airport" class="form-select">
-                  <option value="Electric Components">Electric Components</option>
-                  <option value="Flight Instruments">Flight Instruments</option>
-                  <option value="Mechanical Components">Mechanical Components</option>
-                  <option value="Mechanical Components">Aircraft Materials</option>
-                  <option value="Mechanical Components">Fluids</option>
+              <select name="category" id="category" class="form-select">
+                @foreach ($categories as $category)
+                  <option value="{{$category->Record->ID}}">{{$category->Record->Name}}</option>
+                @endforeach
+              
               </select>
             </div>
             {{-- <label for="model" class="form-label txt-blue">Spare-part Model</label>
@@ -35,7 +34,7 @@
             </div>
             <label for="description" class="form-label txt-blue">Description</label>
             <div class=" mb-3  rounded">
-                <textarea class="form-control" id="description" style="height: 140px"></textarea>
+                <textarea class="form-control" id="description" name="description" style="height: 140px"></textarea>
             </div>
             <label for="formFileMultiple" class="form-label txt-blue">Upload Image</label>
             <input class="form-control" type="file" id="formFileMultiple" multiple />

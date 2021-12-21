@@ -42,9 +42,9 @@
         <div class="col-md-9">
           <div id="owned" class="row justify-content-start align-items-center g-2" style="{{$jwtRole == 'admin' ? 'display: none;' : ''}}">
             <h3 class="text-start mb-3">Owned Spare-part(s)</h3>
-            @isset($assetsOwned)
+            @if(is_null($assetsOwned))
                 <h1>You do not owned any spare parts</h1>
-            @endisset
+            @endif
             <div class="row row-cols-1 row-cols-md-3 g-4">
             @foreach ($assetsOwned as $asset)
               <div class="col">
@@ -52,6 +52,7 @@
                     <img class="card-img-top" src="/assets/sparepart-dummy1.jpg" alt="">
                     <div class="card-body">
                       <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                      <p class="card-text">{{$asset->Record->Description}}</p>
                     </div>   
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">{{$asset->RecordQty->Quantity}} pcs left {{getOrderedQuantity($asset->RecordQty->Quantity, $asset->Record->Quantity)}}</li>
@@ -86,8 +87,10 @@
                     <img class="card-img-top" src="/assets/sparepart-dummy1.jpg" alt="">
                     <div class="card-body">
                       <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                      <p class="card-text">{{$asset->Record->Description}}</p>
                     </div>    
                     <ul class="list-group list-group-flush">
+                      <li class="list-group-item">{{$asset->Record->Category->Name}}</li>
                       <li class="list-group-item">{{$asset->RecordQty->Quantity}} pcs Left</li>
                       <li class="list-group-item">Owned by <b>{{$asset->Record->Org->Name}}</b></li>
                       <li class="list-group-item">Status: {{$asset->Record->Status}}</li>

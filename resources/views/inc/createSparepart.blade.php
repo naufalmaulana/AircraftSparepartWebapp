@@ -17,6 +17,8 @@
                   <option value="Electric Components">Electric Components</option>
                   <option value="Flight Instruments">Flight Instruments</option>
                   <option value="Mechanical Components">Mechanical Components</option>
+                  <option value="Mechanical Components">Aircraft Materials</option>
+                  <option value="Mechanical Components">Fluids</option>
               </select>
             </div>
             {{-- <label for="model" class="form-label txt-blue">Spare-part Model</label>

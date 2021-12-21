@@ -1,15 +1,3 @@
-.history-default{
-  background-color: #414141 !important;
-}
-
-.history-purchased{
-  background-color: rgb(37, 42, 71) !important;
-}
-
-.history-requestRepair{
-  background-color: rgb(18, 46, 46) !important;
-}
-
 .bg-blue {
   background-color: #78D5E4;
 }
@@ -84,6 +72,12 @@
 
 .c-none {
   cursor: default;
+}
+
+.disabled {
+  background-color: grey;
+  color: #C0C0C0;
+  opacity: 0.1;
 }
 
 .dropdown-menu[data-bs-popper] {

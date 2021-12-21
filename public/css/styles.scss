@@ -20,6 +20,12 @@
     cursor: default;
 }
 
+.disabled{
+    background-color:grey;
+    color : #C0C0C0;
+    opacity : 0.1;
+}
+
 @import './navbar';
 @import './auth';
 @import './home';

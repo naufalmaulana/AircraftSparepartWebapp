@@ -37,6 +37,12 @@
             </div>
             <label for="formFileMultiple" class="form-label txt-blue">Upload Image</label>
             <input class="form-control" type="file" id="formFileMultiple" multiple />
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" data-target="formFileMultiple">
+              <label class="form-check-label" for="flexCheckDefault">
+                Use placeholder image
+              </label>
+            </div>
             <div class="text-center">
                 <button type="submit" class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5">Submit</button>
             </div>

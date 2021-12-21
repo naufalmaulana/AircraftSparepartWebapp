@@ -192,4 +192,15 @@ function resetDiv(){
   $("#userlist").hide();
 }
 </script>
+<script>
+  $(document).on('click', '#flexCheckDefault', function () {
+    var target = $(this).data('target');    
+    if ($(this).is(':checked')) {
+        $('#' + target).addClass('disabled').css('pointerEvents','none');
+    }
+    else {
+        $('#' + target).removeClass('disabled').css('pointerEvents','auto');;
+    }
+  });
+</script>
 @endsection

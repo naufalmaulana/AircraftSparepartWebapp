@@ -31,12 +31,12 @@
             <div class=" mb-3  rounded">
               <input name="qty" type="number" id="qty" class="form-control" />
             </div>
-            {{-- <label for="description" class="form-label txt-blue">Description</label>
+            <label for="description" class="form-label txt-blue">Description</label>
             <div class=" mb-3  rounded">
                 <textarea class="form-control" id="description" style="height: 140px"></textarea>
             </div>
             <label for="formFileMultiple" class="form-label txt-blue">Upload Image</label>
-            <input class="form-control" type="file" id="formFileMultiple" multiple /> --}}
+            <input class="form-control" type="file" id="formFileMultiple" multiple />
             <div class="text-center">
                 <button type="submit" class="btn text-white text-center fw-bold py-2 px-5 rounded bg-blue my-5">Submit</button>
             </div>

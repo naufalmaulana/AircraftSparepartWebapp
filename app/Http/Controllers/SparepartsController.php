@@ -86,6 +86,18 @@ class SparepartsController extends Controller
     }
 
     public function add(Request $request){
+        $imagePath = "";
+        if($request->usePlaceholder != "on"){
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+        
+            $imageName = time().'.'.$request->image->extension();  
+        
+            $image = $request->image->move(public_path('images'), $imageName);
+            $imagePath = "/images/".$imageName;
+        }
+       
         $token = $request->cookie('token');
         $response = Http::withHeaders([
             'Authorization' => 'Bearer '.$token,
@@ -95,8 +107,11 @@ class SparepartsController extends Controller
             "quantity" => $request->qty, 
             "weight" => $request->weight,
             "desc" => $request->description,
-            "category" => $request->category
+            "category" => $request->category,
+            "image" => $imagePath
         ]);
+
+        
 
         return redirect()->route('home');
     }

@@ -72,3 +72,12 @@ if(!function_exists('getOrderedQuantity')){
         return "(".($qty - $leftQty)." pcs ordered)";
     }
 }
+
+if(!function_exists('getImagePath')){
+    function getImagePath($path) {
+        if($path == ""){
+            return "/assets/sparepart-dummy1.jpg";
+        } 
+        return $path;
+    }
+}

@@ -9,10 +9,10 @@
     <div class="container py-5">
         <div class="row justify-content-center align-items-center g-4 p-5 rounded shadow">  
             <div class="col-md-6 text-center">
-                <img src="/assets/sparepart-dummy1.jpg" class="img-fluid" alt="">
+                <img src="{{getImagePath($asset['PictureUrl'])}}" class="img-fluid" alt="">
             </div>
             <div class="col-md-6">
-                <form method="POST" action="{{route('storeUpdate', ['id' => $asset['ID']])}}">
+                <form method="POST" action="{{route('storeUpdate', ['id' => $asset['ID']])}}" enctype="multipart/form-data">
                     @csrf
                     @if ($jwtOrgType != "airline")
                         <div>
@@ -95,6 +95,10 @@
                             </div>
                         </div>
                     @endif
+                    <div class="col-md-6 mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input class="form-control" type="file" id="image" name="image" multiple />
+                    </div>
                     <button class="btn bg-blue txt-white btn-md px-5 rounded-pill fw-bold" type="submit">Submit</button>
                 </form>
             </div>
@@ -105,6 +109,16 @@
 
 @section('js')
 <script>
+    $(document).on('click', '#flexCheckDefault', function () {
+        var target = $(this).data('target');    
+        if ($(this).is(':checked')) {
+            $('#' + target).addClass('disabled').css('pointerEvents','none');
+        }
+        else {
+            $('#' + target).removeClass('disabled').css('pointerEvents','auto');;
+        }
+    });
+
     function increment() {
        document.getElementById('demoInput').stepUp();
     }

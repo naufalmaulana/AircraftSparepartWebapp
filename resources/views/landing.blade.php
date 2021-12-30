@@ -84,7 +84,7 @@
             @foreach ($assetsAvailable as $asset)
               <div class="col">
                 <div class="card">
-                    <img class="card-img-top" src="/assets/sparepart-dummy1.jpg" alt="">
+                    <img class="card-img-top" src="{{getImagePath($asset->Record->PictureUrl)}}" alt="">
                     <div class="card-body">
                       <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
                       <p class="card-text">{{$asset->Record->Description}}</p>

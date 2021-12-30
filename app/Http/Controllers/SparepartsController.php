@@ -36,6 +36,20 @@ class SparepartsController extends Controller
     }
 
     public function storeUpdate($id, Request $request){
+        $imagePath = "";
+
+        if($request->image){
+            $request->validate([
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            
+        
+            $imageName = time().'.'.$request->image->extension();  
+        
+            $image = $request->image->move(public_path('images'), $imageName);
+            $imagePath = "/images/".$imageName;
+        }
+
         if($request->attributes->get('jwtOrgType') != "airline"){
             $token = $request->cookie('token');
             $response = Http::withHeaders([
@@ -46,6 +60,7 @@ class SparepartsController extends Controller
                 "quantity" => $request->qty,
                 "weight" => $request->weight,
                 "status" => $request->status,
+                "image" => $imagePath
             ]);
         } else {
             $token = $request->cookie('token');
@@ -56,6 +71,7 @@ class SparepartsController extends Controller
                 "flightLog" => $request->flightLog,
                 "totalHours" => $request->totalHours,
                 "status" => $request->status,
+                "image" => $imagePath
             ]);
         }
 

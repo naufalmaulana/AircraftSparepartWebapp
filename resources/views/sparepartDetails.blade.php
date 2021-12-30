@@ -9,7 +9,7 @@
     <div class="container py-5">
         <div class="row justify-content-center align-items-center g-4 p-5 rounded shadow">
             <div class="col-md-6 text-center">
-                <img src="/assets/sparepart-dummy1.jpg" class="img-fluid" alt="">
+                <img src="{{getImagePath($asset['PictureUrl'])}}" class="img-fluid" alt="">
             </div>
             <div class="col-md-6">
                 <h1 class="fw-bold">

@@ -77,7 +77,7 @@
                                 <div>
                                     <label for="flightLog" class="form-label">Flight Log</label>
                                     <div class="mb-3  rounded">
-                                        <input type="text" id="flightLog" name="flightLog" class="form-control validate" value="{{$asset['FlightLog']}}"/>
+                                        <input type="file" id="flightLog" name="flightLog" class="form-control validate" accept=".xls,.pdf,.csv" value="{{$asset['FlightLog']}}"/>
                                     </div>
                                 </div>
                                 <div class="ms-md-4">

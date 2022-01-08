@@ -20,11 +20,11 @@
               
               </select>
             </div>
-            <label for="weight" class="form-label txt-blue">Weight</label>
+            <label for="weight" class="form-label txt-blue">Weight (Kg)</label>
             <div class=" mb-3  rounded">
               <input name="weight" type="number" id="weight" class="form-control" />
             </div>
-            <label for="qty" class="form-label txt-blue">Quantity</label>
+            <label for="qty" class="form-label txt-blue">Quantity (Pcs)</label>
             <div class=" mb-3  rounded">
               <input name="qty" type="number" id="qty" class="form-control" />
             </div>

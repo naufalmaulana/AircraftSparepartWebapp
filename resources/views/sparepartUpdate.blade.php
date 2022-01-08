@@ -44,13 +44,13 @@
                             <hr>
                             <div class="mb-4 d-md-flex">
                                 <div>
-                                    <label for="weight" class="form-label">Weight</label>
+                                    <label for="weight" class="form-label">Weight (Kg)</label>
                                     <div class="mb-3  rounded">
                                         <input type="number" id="weight" name="weight" class="form-control validate" value="{{$asset['Weight']}}"/>
                                     </div>
                                 </div>
                                 <div class="ms-md-4">
-                                    <label for="qty" class="form-label">Quantity</label>
+                                    <label for="qty" class="form-label">Quantity (Pcs)</label>
                                     <div class=" mb-3 rounded">
                                         <input type="number" id="qty" name="qty" class="form-control validate" value="{{$asset['Quantity']}}"/>
                                     </div>

@@ -6,7 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
         </div>
         <div class="modal-header d-block text-center">
-            <img class="mb-3" src="/assets/circle-check.svg" alt="">
+            <img class="mb-3" src="/assets/circle-cart.svg" alt="">
             <h5 class="modal-title fw-bold" id="airlineBuyLabel">Buy Spare Part</h5>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
@@ -23,7 +23,7 @@
                 <input type="hidden" name="number" id="numberInput">
                 <input type="hidden" name="weight" id="weightInput">
                 <input type="hidden" name="updateBy" id="updateByInput">
-                <button type="submit" class="btn bg-blue text-white fw-bold px-5">Agree</button>
+                <button type="submit" class="btn bg-blue text-white fw-bold px-5">Ok</button>
             
             </div>
         </form>

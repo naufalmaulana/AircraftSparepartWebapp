@@ -6,7 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> 
         </div>
         <div class="modal-header d-block text-center">
-            <img class="mb-3" src="/assets/circle-check.svg" alt="">
+            <img class="mb-3" src="/assets/circle-tools.svg" alt="">
             <h5 class="modal-title fw-bold" id="staticBackdropLabel">Request Maintenance</h5>
           <!-- {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}} -->
         </div>
@@ -21,7 +21,7 @@
             </div>
           </div>
           <div class="modal-footer justify-content-center">
-              <button type="submit" class="btn bg-blue text-white fw-bold px-5">Agree</button>
+              <button type="submit" class="btn bg-blue text-white fw-bold px-5">Request</button>
           </div>
         </form>
       </div>

@@ -12,6 +12,9 @@
                 <img src="{{getImagePath($asset['PictureUrl'])}}" class="img-fluid" alt="">
             </div>
             <div class="col-md-6">
+                <h1 class="fw-bold">
+                    {{$asset['ID']}}
+                </h1>
                 <form method="POST" action="{{route('storeUpdate', ['id' => $asset['ID']])}}" enctype="multipart/form-data">
                     @csrf
                     @if ($jwtOrgType != "airline")
@@ -63,14 +66,6 @@
                                 <h1 class="fw-bold">
                                     {{$asset['Number']}} - {{$asset['Name']}}
                                 </h1>
-                            </div>
-                            <div class="">
-                                <div class=" text-center text-white p-0 btn btn-sm c-none ">
-                                    <select id="status" name="status" class="form-select">
-                                        <option {{$asset['Status'] == "Available" ? "selected": ""}}value="Available">Available</option>
-                                        <option {{$asset['Status'] == "Not Available" ? "selected": ""}} value="Not Available">Not Available</option>
-                                    </select>
-                                </div>
                             </div>
                             <hr>
                             <div class="mb-4 d-md-flex">

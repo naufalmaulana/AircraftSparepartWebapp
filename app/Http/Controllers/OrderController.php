@@ -53,6 +53,7 @@ class OrderController extends Controller
             'Authorization' => 'Bearer '.$token,
         ])->post('http://localhost:8080/api/repairorder/add/'.$id, [
             "owner" => $request->attributes->get('jwtEmail'),
+            "repairerCompany" => $request->company
         ]);
     
         return redirect()->route('myorder');

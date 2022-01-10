@@ -7,16 +7,17 @@
         </div>
         <div class="modal-header d-block text-center">
             <img class="mb-3" src="/assets/circle-tools.svg" alt="">
-            <h5 class="modal-title fw-bold" id="staticBackdropLabel">Request Maintenance</h5>
+            <h5 class="modal-title fw-bold" id="staticBackdropLabel">Request Repair</h5>
           <!-- {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}} -->
         </div>
-        <form id="serviceRequestForm" action="POST">
+        <form id="serviceRequestForm" method="POST">
+          @csrf
           <div class="modal-body ">
             <label for="company" class="form-label">Select Company</label>
             <div class=" mb-3 rounded ">
               <select id="company" name="company" class="form-select">
-                <option value="mro1">MRO 1</option>
-                <option value="mro2">MRO 2</option>
+                <option value="cengkarengairwayengineering">Cengkareng Airway Engineering</option>
+                <option value="semco">Semco</option>
               </select>
             </div>
           </div>

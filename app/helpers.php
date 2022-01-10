@@ -81,3 +81,12 @@ if(!function_exists('getImagePath')){
         return $path;
     }
 }
+
+if(!function_exists('isOrderPending')){
+    function isOrderPending($leftQty, $qty) {
+        if($leftQty == $qty){
+            return false;
+        } 
+        return true;
+    }
+}

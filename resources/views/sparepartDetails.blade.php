@@ -13,6 +13,9 @@
             </div>
             <div class="col-md-6">
                 <h1 class="fw-bold">
+                    {{$asset['ID']}}
+                </h1>
+                <h1 class="fw-bold">
                     {{$asset['Number']}} - {{$asset['Name']}}
                 </h1>
                 <div class="bg-blue text-center text-white px-3 py-0 btn btn-sm c-none">
@@ -24,9 +27,9 @@
                     <li>Quantity: <span class="txt-blue gw-bold">{{$asset['AvailQty']}} pcs</span></li>
                     <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
                     @if ($jwtOrgType == "airline" && $asset['Org']['Type'] == "airline")
-                        <li>Flight Log: <span class="txt-blue gw-bold"><a href="{{$asset['FlightLog']}}">{{$asset['FlightLog']}}</a></span></li>
-                        <li>Next Overhaul: <span class="txt-blue gw-bold">{{$asset['NextOverhaul']}}</span></li>
-                        <li>Total Hours Spend: <span class="txt-blue gw-bold">{{$asset['TotalHoursSpend']}} hours</span></li>
+                        <li>Flight Log: <span class="txt-blue gw-bold">{{$asset['FlightLog'] == "" ? "Not Available" : '<a href="'.$asset['FlightLog'].'">'.$asset['FlightLog'].'</a>'}}</span></li>
+                        <li>Next Overhaul: <span class="txt-blue gw-bold">{{$asset['NextOverhaul'] == "" ? "Not Inputted" : $asset['NextOverhaul']}}</span></li>
+                        <li>Total Hours Spend: <span class="txt-blue gw-bold">{{$asset['TotalHoursSpend'] == -1 ? "Not Inputted" : $asset['TotalHoursSpend'].' hours'}} </span></li>
                     @endif
                     <li>Latest Update Date: <span class="txt-blue gw-bold">{{$asset['Timestamp']}}</span></li>
                 </ul>

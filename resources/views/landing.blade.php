@@ -12,7 +12,8 @@
           <div class=" rounded  p-2 right-content">
             <div class="mb-3">
               <h3 class="text-start" style="word-wrap: anywhere">{{$jwtOrgName}}</h3>
-              <p class="mb-0 mt-2">Email: {{$jwtEmail}}</p>
+              <p class="mb-0  mt-2">Type: {{$jwtOrgType}}</p>
+              <p class="mb-0">Email: {{$jwtEmail}}</p>
               <p>Role: {{ucfirst($jwtRole)}}</p>
             </div>
             <table class="table border">
@@ -56,7 +57,7 @@
                     </div>   
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item">{{$asset->RecordQty->Quantity}} pcs left {{getOrderedQuantity($asset->RecordQty->Quantity, $asset->Record->Quantity)}}</li>
-                      <li class="list-group-item">Status: {{$asset->Record->Status}}</li>
+                      <li class="list-group-item">Status: {{$asset->Record->Status}} {{isOrderPending($asset->Record->Quantity, $asset->RecordQty->Quantity) ? "(Pending Order)" : ""}}</li>
                     </ul>
                     <div class="card-body">
                       <div class="d-block">

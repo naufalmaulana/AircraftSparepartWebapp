@@ -40,8 +40,8 @@
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
                           <td>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Verify</button>
-                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Reject</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true, '')" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Verify</button>
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false, '')" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Reject</button>
                           </td>
                         </tr>
                       @endforeach
@@ -71,8 +71,10 @@
                             <div class="text-success">{{$order->Record->Status}}</div>
                         </td>
                         <td>
-                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Verify</button>
-                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false)" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Reject</button>
+                            <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true, '{{$order->Record->Status}}')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>{{$order->Record->Status == "Repairing" ? "Finish Repair" : "Verify"}}</button>
+                            @if($jwtOrgType != "MRO" && $order->Record->Status != "Repairing")
+                              <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false, '')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Reject</button>
+                            @endif
                         </td>
                       </tr>
                     @endforeach
@@ -90,11 +92,19 @@
 
 @section('js')
 <script>
-  function changeVerifyAction(id, approve){
+  function changeVerifyAction(id, approve, status){
     $("#verifyOrderForm").attr('action', "/update/order/" + id);
     $("#verifyServiceOrderForm").attr('action', "/repair/verify/" + id);
-    $("#verifyStatus").val(approve);
-    $("#verifySOStatus").val(approve);
+    $("#rejectOrderForm").attr('action', "/update/order/" + id);
+    $("#rejectServiceOrderForm").attr('action', "/repair/verify/" + id);
+    $(".orderStatus").val(approve);
+    if(status == "Repairing"){
+      $("#verifyServiceOrderLabel").text("Finish Repair");
+      $("#verifyServiceOrderDesc").text("Are you sure that you want to finish repairing?");
+    } else{
+      $("#verifyServiceOrderLabel").text("Verify Order");
+      $("#verifyServiceOrderDesc").text("Are you sure that you want to verify this order?");
+    }
   }
 
   $("#purchaseBtn").on("click",function(){

@@ -10,7 +10,7 @@
             <h5 class="modal-title fw-bold" id="verifyServiceOrderLabel">Verify Order</h5>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
-        <div class="modal-body text-center">
+        <div class="modal-body text-center" id="verifyServiceOrderDesc">
             Are you sure that you want to verify this order?
         </div>
         <div class="modal-footer justify-content-center">
@@ -18,7 +18,7 @@
           <button type="button" class="btn btn-primary">Understood</button> --}} 
           <form id="verifyServiceOrderForm" method="POST">
             @csrf
-            <input type="hidden" id="verifySOStatus" name="verifySOStatus">
+            <input type="hidden" id="verifySOStatus" name="verifySOStatus" class="orderStatus">
             <button type="submit" class="btn bg-blue text-white fw-bold px-5">Verify</button>
          </form>
         </div>

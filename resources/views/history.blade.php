@@ -19,7 +19,7 @@
                 <img src="/assets/sparepart-dummy1.jpg" class="img-fluid mb-4 " alt="">
                 <h3 class="date">{{$asset['Timestamp']}}</h3>
                 <h1>{{$asset['Name']}}</h1>
-                <p>Owned By: <span class="txt-blue">{{$asset['Owner']}}</span></p>
+                <p>Owned By: <span class="txt-blue">{{$asset['Org']['Name']}}</span></p>
                 <p>Spare-part Id: <span class="txt-blue">{{$asset['Number']}}</span></p>
                 <p>Quantity: <span class="txt-blue">{{$asset['Quantity']}} pcs</span></p>
                 <p>Total Weight: <span class="txt-blue">{{$asset['Weight']}} kg</span></p>

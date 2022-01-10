@@ -24,6 +24,7 @@
                 <hr>
                 <ul class="px-0 mb-3" style="list-style-type:none">
                     <p>{{$asset['Description']}}</p>
+                    <li>Owned By: <span class="txt-blue gw-bold">{{$asset['Org']['Name']}}</span></li>
                     <li>Quantity: <span class="txt-blue gw-bold">{{$asset['AvailQty']}} pcs</span></li>
                     <li>Weight: <span class="txt-blue gw-bold">{{$asset['Weight']}} kg</span></li>
                     @if ($jwtOrgType == "airline" && $asset['Org']['Type'] == "airline")

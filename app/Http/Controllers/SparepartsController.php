@@ -50,6 +50,13 @@ class SparepartsController extends Controller
             $imagePath = "/images/".$imageName;
         }
 
+        if($request->flightLog){
+            $logName = time().'.'.$request->flightLog->extension();  
+        
+            $flightLog = $request->flightLog->move(public_path('flightLog'), $logName);
+            $logPath = "/flightLog/".$logName;
+        }
+
         if($request->attributes->get('jwtOrgType') != "airline"){
             $token = $request->cookie('token');
             $response = Http::withHeaders([
@@ -68,7 +75,7 @@ class SparepartsController extends Controller
                 'Authorization' => 'Bearer '.$token,
             ])->put('http://localhost:8080/api/asset/airline/update/'.$id, [
                 "nextOverhaul" => $request->nextOverhaul,
-                "flightLog" => $request->flightLog,
+                "flightLog" => $logPath,
                 "totalHours" => $request->totalHours,
                 "status" => $request->status,
                 "image" => $imagePath

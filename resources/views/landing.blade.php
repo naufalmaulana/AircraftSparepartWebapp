@@ -52,7 +52,7 @@
                 <div class="card">
                     <img class="card-img-top" src="{{getImagePath($asset->Record->PictureUrl)}}" alt="">
                     <div class="card-body">
-                      <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                      <h5 class="card-title">{{$asset->Record->Number}} - {{$asset->Record->Name}}</h5>
                       <p class="card-text">{{$asset->Record->Description}}</p>
                     </div>   
                     <ul class="list-group list-group-flush">
@@ -87,7 +87,7 @@
                 <div class="card">
                     <img class="card-img-top" src="{{getImagePath($asset->Record->PictureUrl)}}" alt="">
                     <div class="card-body">
-                      <h5 class="card-title">{{$asset->Record->ID}} - {{$asset->Record->Name}}</h5>
+                      <h5 class="card-title">{{$asset->Record->Number}} - {{$asset->Record->Name}}</h5>
                       <p class="card-text">{{$asset->Record->Description}}</p>
                     </div>    
                     <ul class="list-group list-group-flush">

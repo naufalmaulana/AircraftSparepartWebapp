@@ -25,8 +25,10 @@
                         <th scope="col">Order ID</th>
                         <th scope="col">Date</th>
                         <th class="d-none d-md-table-cell" scope="col">Spare-part Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Purchase Request By</th>
                         <th scope="col">Status</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" style="width: 15%">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -36,10 +38,12 @@
                           <td>{{$order->Record->ID}}</td>
                           <td>{{$order->Record->Timestamp}}</td>
                           <td class="d-none d-md-table-cell"><a href="{{route('sparepartDetail',['id' => $order->Record->AssetID])}}">{{$order->Record->AssetName}}</a></td>
+                          <td scope="col">{{$order->Record->Quantity}}</td>
+                          <td scope="col">{{$order->Record->BuyerOrg->Name}}</td>
                           <td>
                               <div class="text-success">{{$order->Record->Status}}</div>
                           </td>
-                          <td>
+                          <td style="width: 15%">
                               <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true, '')" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Verify</button>
                               <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false, '')" {{checkOrderStatus($order->Record->Status, $jwtOrg, $order->Record->BuyerOrg->ID, $order->Record->SellerOrg->ID, $jwtRole) ? "" : "disabled"}}>Reject</button>
                           </td>
@@ -56,8 +60,9 @@
                       <th scope="col">Order ID</th>
                       <th scope="col">Date</th>
                       <th class="d-none d-md-table-cell" scope="col">Spare-part Name</th>
+                      <th scope="col">Request Repair To</th>
                       <th scope="col">Status</th>
-                      <th scope="col">Action</th>
+                      <th scope="col" style="width: 15%">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -67,10 +72,11 @@
                         <td>{{$order->Record->ID}}</td>
                         <td>{{$order->Record->Timestamp}}</td>
                         <td class="d-none d-md-table-cell"><a href="{{route('sparepartDetail',['id' => $order->Record->AssetID])}}">{{$order->Record->AssetName}}</a></td>
+                        <td>{{$order->Record->RequesterOrg->Name}}</td>
                         <td>
                             <div class="text-success">{{$order->Record->Status}}</div>
                         </td>
-                        <td>
+                        <td style="width: 15%"> 
                             <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#verifyServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', true, '{{$order->Record->Status}}')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>{{$order->Record->Status == "Repairing" ? "Finish Repair" : "Verify"}}</button>
                             @if($jwtOrgType != "MRO" && $order->Record->Status != "Repairing")
                               <button type="button" class="btn bg-blue text-white fw-bold btn-sm" data-bs-toggle="modal" data-bs-target="#rejectServiceOrderModal" onclick="changeVerifyAction('{{$order->Record->ID}}', false, '')" {{checkRepairOrderStatus($order->Record->Status, $jwtOrg, $order->Record->RequesterOrg->ID, $order->Record->RepairerOrg->ID) ? "" : "disabled"}}>Reject</button>

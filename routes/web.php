@@ -33,6 +33,7 @@ Route::middleware('auth.JWT')->group(function () {
     Route::post('/repair/verify/{id}', 'App\Http\Controllers\OrderController@verifyRepair')->name('verifyRepair');
 
     Route::get('/HomeManufacture','App\Http\Controllers\HomeController@mroLanding')->name('mroLanding');
+    Route::get('/Documentation','App\Http\Controllers\HomeController@helper')->name('helper');
     Route::get('/SparepartsCatalogue','App\Http\Controllers\SparepartsController@spareparts')->name('spareparts');
     Route::get('/ShoppingCart','App\Http\Controllers\CartController@cart')->name('cart');
     Route::get('/MyOrder','App\Http\Controllers\OrderController@myorder')->name('myorder');

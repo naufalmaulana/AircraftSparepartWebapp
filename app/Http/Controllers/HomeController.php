@@ -49,4 +49,8 @@ class HomeController extends Controller
     public function mroLanding(){
         return view("mroLanding");
     }
+
+    public function helper(){
+        return view("helper");
+    }
 }

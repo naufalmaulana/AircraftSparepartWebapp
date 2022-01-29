@@ -25,6 +25,9 @@
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('cart') }}"><i class="bi bi-cart-fill"></i></a>
           </li> --}}
           <li class="nav-item">
+            <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('helper') }}">Documentation</a>
+          </li>
+          <li class="nav-item">
             {{-- <a class="nav-link fw-bold text-light hover-txt-blue" href="#"><i class="bi bi-person-fill"></i></a> --}}
             <a class="nav-link dropdown-toggle hover-txt-blue text-white" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="bi bi-person-fill"></i>

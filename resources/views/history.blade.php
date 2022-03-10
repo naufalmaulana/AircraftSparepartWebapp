@@ -16,7 +16,7 @@
           @foreach ($assets as $asset)
             <li class="{{getHistoryClass($asset)}}">
               <div class="timeline-content" >
-                <img src="/assets/sparepart-dummy1.jpg" class="img-fluid mb-4 " alt="">
+                <img src="{{$asset['PictureUrl']}}" class="img-fluid mb-4 " alt="">
                 <h3 class="date">{{$asset['Timestamp']}}</h3>
                 <h1>{{$asset['Name']}}</h1>
                 <p>Owned By: <span class="txt-blue">{{$asset['Org']['Name']}}</span></p>

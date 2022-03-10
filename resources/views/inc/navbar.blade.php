@@ -16,7 +16,7 @@
           <li class="nav-item ">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('home') }}">Home</a>
           </li>
-          @if($jwtRole != "admin")
+          @if($jwtRole ?? '' != "admin")
           <li class="nav-item">
             <a class="nav-link fw-bold text-light hover-txt-blue" href="{{ route('myorder') }}">My Orders</a>
           </li>

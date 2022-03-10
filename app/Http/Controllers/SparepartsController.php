@@ -37,6 +37,7 @@ class SparepartsController extends Controller
 
     public function storeUpdate($id, Request $request){
         $imagePath = "";
+        $logPath = "";
 
         if($request->image){
             $request->validate([

@@ -84,7 +84,7 @@
                                 <div class="ms-md-4">
                                     <label for="totalHours" class="form-label">Total Hours Spend</label>
                                     <div class=" mb-3 rounded">
-                                        <input type="number" id="totalHours" name="totalHours" class="form-control validate" value="{{$asset['TotalHoursSpend']}}"/>
+                                        <input type="number" id="totalHours" name="totalHours" class="form-control validate" value="{{$asset['TotalHoursSpend'] == -1 ? 0 : $asset['TotalHoursSpend']}}"/>
                                     </div>
                                 </div>
                             </div>
